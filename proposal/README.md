@@ -51,10 +51,6 @@ Company:
 - Prioritize Students in Queue: Companies can change the order of students in their queue to first.
 - Drop-in/Queue Status: Companies can set either to operate by drop-ins (not using the queue system) or to use the queue system. Optimize for smaller companies or companies with fewer people visiting.    
 
-Recruiter
-- Register: Recruiters can register which Company the recruiter is from. 
-- Manage Job Openings: Recruiters can list the Job opening and able to post the availability .
-
 School/Admin
 - Create Event: Admin can create the career fair event on the website.
 - Manage Companies: Admin can accept company requests to join career fair. Admin can also Add/delete companies.
