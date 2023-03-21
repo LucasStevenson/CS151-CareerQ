@@ -2,7 +2,7 @@
 
 ## List of UML Diagrams 
 
-| Diagram                                                                                                                  | Summary Description                                                         |
+| Diagram                                                                                                                  | Description of Diagram                                                       |
 | -------------------------------------------------------------------------                                                | --------------------------------------------------------------------------- |
 | [Class]                                                                                                                  |                                                                             |                            
 | [Use Case]                                                                                                                  |                                                                             |                            
