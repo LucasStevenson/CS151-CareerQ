@@ -31,7 +31,7 @@ Intended usage for recruiters/companies, students and schools.
 
 ### Operations for Users:
 
-Students:
+Student:
 - Register/Login: Students can create an account or log in using their university credentials to access the system.
 - Browse Companies: Students can view the list of companies attending the career fair.
 - Overview Queue Status: Students can see the number of people waiting in line for each company and the estimated wait time.
@@ -50,13 +50,13 @@ Company:
 - Remove Students in the Queue: Companies can manually remove a student from the queue.
 - Prioritize Students in Queue: Companies can change the order of students in their queue to first.
 - Drop-in/Queue Status: Companies can set either to operate by drop-ins (not using the queue system) or to use the queue system. Optimize for smaller companies or companies with fewer people visiting.    
+
 Recruiter
-- Register which Company you are from 
-- List the Job opening and able to post the availability 
+- Register: Recruiters can register which Company the recruiter is from. 
+- Manage Job Openings: Recruiters can list the Job opening and able to post the availability .
 
 School/Admin
-- Create the career fair event on the website
-- Accept company requests to join career fair
-- Add/delete companies
-- Set a time frame for the career fair (what times people are able to sign up).
+- Create Event: Admin can create the career fair event on the website.
+- Manage Companies: Admin can accept company requests to join career fair. Admin can also Add/delete companies.
+- Set Event Timeframe: Set a time frame for the career fair (what times people are able to sign up).
 
