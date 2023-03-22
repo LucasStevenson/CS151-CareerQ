@@ -4,7 +4,7 @@
 
 | Diagram | Description of Diagram |
 | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [Class]                                                                                                          | Write Here                                                                           |
+| [Class] https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/CareerQClassDiagram.pdf               | Write Here                                                                           |
 | [Use Case](https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/useCaseDiagram.drawio.pdf)         | In this Diagram, the Use Case is displayed. The Users: Admin, Student, and Company have different and/or same use case for this Project.                                                                            |
 | [State](https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/stateDiagram.drawio.pdf)              | In this State Diagram, it shows different states (Student, Admin, Company) after being authenticated. Users are able to perform different tasks depending on what role the Users have.                                                                            |
-| [Sequence]                                                                                                       | Write Here                                                                           |
+| [Sequence] (https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/CareerQSequenceDiagram.pdf)        | Write Here                                                                           |
