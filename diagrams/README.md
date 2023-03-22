@@ -4,7 +4,7 @@
 
 | Diagram                                                                                                                  | Description of Diagram                                                       |
 | -------------------------------------------------------------------------                                                | --------------------------------------------------------------------------- |
-| [Class]                                                                                                                  |                                                                             |                            
-| [Use Case]                                                                                                                  |                                                                             |                            
-| [State]                                                                                                                  |                                                                             |                            
-| [Sequence]                                                                                                                  |                                                                             |                            
+| [Class]                                                                                                                  | Write Here                                                                           |                            
+| [Use Case]                                                                                                               | Write Here                                                                           |                            
+| [State]                                                                                                                  | Write Here                                                                           |                            
+| [Sequence]                                                                                                               | Write Here                                                                           |                            
