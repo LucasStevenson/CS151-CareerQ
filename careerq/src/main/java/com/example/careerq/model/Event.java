@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.careerq.Queue;
-import com.example.careerq.entities.Company;
 
 @Document(collection = "events")
 public class Event {

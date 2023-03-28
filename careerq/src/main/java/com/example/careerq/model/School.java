@@ -1,10 +1,12 @@
-package com.example.careerq.entities;
+package com.example.careerq.model;
 
 import java.util.Date;
 
-import com.example.careerq.model.Event;
-import com.example.careerq.model.User;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document (collection = "users")
+@TypeAlias("school")
 public class School extends User {
 	private String schoolName;
 	

@@ -1,9 +1,12 @@
-package com.example.careerq.entities;
+package com.example.careerq.model;
+
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.careerq.Queue;
-import com.example.careerq.model.User;
-import com.example.careerq.model.Event;
 
+@Document (collection = "users")
+@TypeAlias("company")
 public class Company extends User {
 	private String companyName;
 	private Queue<Student> queue;
