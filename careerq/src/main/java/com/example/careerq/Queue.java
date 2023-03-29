@@ -4,19 +4,19 @@ import java.util.LinkedList;
 
 public class Queue<T> {
 	private LinkedList<T> people;
-	private int queueSize;
+	private int maxQueueSize;
 	private QueueStatus status;
 	
 	public void setSize(int size) {
-		this.queueSize = size;
+		this.maxQueueSize = size;
 	}
 	
 	public void pause() {
-		this.status = status.PAUSED;
+		this.status = QueueStatus.PAUSED;
 	}
 	
 	public void resume() {
-		this.status = status.ACTIVE;
+		this.status = QueueStatus.ACTIVE;
 	}
 	
 	public void remove(T entity) {
