@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.careerq.entities.Company;
+import com.example.careerq.model.Company;
 import com.example.careerq.model.Event;
 import com.example.careerq.repository.EventRepository;
 

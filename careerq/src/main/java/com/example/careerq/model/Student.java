@@ -1,15 +1,10 @@
-package com.example.careerq.entities;
+package com.example.careerq.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.careerq.Queue;
 import com.example.careerq.model.User;
-import com.example.careerq.repository.UserRepository;
 
 public class Student extends User {
-    @Autowired
-    private UserRepository userRepository; 
-
 	private String name;
 	
 	public void joinQueue(Company company) {
