@@ -2,10 +2,14 @@ package com.example.careerq.model;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.careerq.model.Event;
 import com.example.careerq.model.User;
 
+@Document (collection = "users")
+@TypeAlias("school")
 public class School extends User {
 	private String schoolName;
 	
@@ -23,13 +27,5 @@ public class School extends User {
 	
 	public String getSchoolName() {
 		return schoolName;
-	}
-	
-	public void rejectCompany(Company company, Event event) {
-		
-	}
-	
-	public void removeCompany(Company company, Event event) {
-		
 	}
 }

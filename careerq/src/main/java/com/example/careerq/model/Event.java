@@ -17,8 +17,8 @@ public class Event {
 	private String host;
 	private Date startTime;
 	private Date endTime;
-	private Queue<Company> waitingList;
-	private List<Company> participatingCompanies;
+	private Queue<Company> waitingList = new Queue<>();
+	private List<Company> participatingCompanies = new ArrayList<>();
 	
 	public Event() {}
 	
@@ -26,24 +26,6 @@ public class Event {
 		this.host = host;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.waitingList = new Queue<Company>();
-		this.participatingCompanies = new ArrayList<Company>();
-	}
-	
-	public void addToWaitingList(Company company) { // make sure to add this to UML diagram
-		this.waitingList.add(company);
-	}
-	
-	public void removeFromWaitingList(Company company) {
-		this.waitingList.remove(company);
-	}
-	
-	public void removeFromEvent(Company company) {
-		this.participatingCompanies.remove(company);
-	}
-	
-	public void addToEvent(Company company) {
-		this.participatingCompanies.add(company);
 	}
 	
 	// getters and setters
@@ -77,6 +59,14 @@ public class Event {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+	
+	public Queue<Company> getWaitingList() {
+		return waitingList;
+	}
+	
+	public List<Company> getParticipatingCompanies() {
+		return participatingCompanies;
 	}
 
 }

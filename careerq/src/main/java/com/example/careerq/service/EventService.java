@@ -14,7 +14,7 @@ import com.example.careerq.repository.EventRepository;
 public class EventService {
 	@Autowired
 	private EventRepository eventRepository;
-
+	
 	public Optional<Event> getEventById(String id) {
 		return eventRepository.findById(id);
 	}
@@ -24,22 +24,23 @@ public class EventService {
 	}
 
 	public void addToWaitingList(Event event, Company company) {
-		event.addToWaitingList(company); // first, modify the `waitingList` list in the event class
+		event.getWaitingList().add(company); // first, modify the `waitingList` list in the event class
 		eventRepository.save(event); // save changes to db
 	}
 
 	public void removeFromWaitingList(Event event, Company company) {
-		event.removeFromWaitingList(company);
+		event.getWaitingList().remove(company);
 		eventRepository.save(event);
 	}
 
 	public void removeFromEvent(Event event, Company company) {
-		event.removeFromEvent(company);
+		event.getParticipatingCompanies().remove(company);
 		eventRepository.save(event);
 	}
 
 	public void addToEvent(Event event, Company company) {
-		event.addToEvent(company);
+		event.getWaitingList().remove(company); // remove it from the waiting list first
+		event.getParticipatingCompanies().add(company); // then add the company to the list of participating companies
 		eventRepository.save(event);
 	}
 }
