@@ -20,14 +20,14 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 
 public class AuthController {
-	private static UserService userService;
-	
-	public static void main(String[] args) {
-		post("/login", (req, res) -> {
-			String email = req.queryParams("email");
-			String password = req.queryParams("password");
-			
-			// check if the email exists
+    private static UserService userService;
+
+    public static void main(String[] args) {
+        post("/login", (req, res) -> {
+            String email = req.queryParams("email");
+            String password = req.queryParams("password");
+
+            // check if the email exists
             User user = userService.findByEmail(email);
             if (user == null) {
                 res.status(400);
@@ -45,18 +45,18 @@ public class AuthController {
 
             res.status(200);
             return token;
-		});
-		
-		post("/register", (req, res) -> {
-			// validate the req data (prolly use helper method and pass in req data as json object)
-			
-			// check if user is already in database
-			
-			// hash the password
-			
-			// create a new user object with the user details. make sure to use hashed password
-			
-			// save user object to database
-		})
-	}
+        });
+
+        post("/register", (req, res) -> {
+            // validate the req data (prolly use helper method and pass in req data as json object)
+
+            // check if user is already in database
+
+            // hash the password
+
+            // create a new user object with the user details. make sure to use hashed password
+
+            // save user object to database
+        })
+    }
 }
