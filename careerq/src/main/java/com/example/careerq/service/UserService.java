@@ -1,17 +1,28 @@
 package com.example.careerq.service;
 
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.careerq.model.User;
+import com.mongodb.client.MongoClients;
 
-import com.example.careerq.model.Event;
-import com.example.careerq.repository.EventRepository;
-import com.example.careerq.repository.UserRepository;
+import dev.morphia.Datastore;
+import dev.morphia.Morphia;
+import dev.morphia.query.experimental.filters.Filters;
+
 
 public class UserService {
-	@Autowired
-	private EventRepository eventRepository;
+	String uri;
+	// datastore that will connect to the mongo database
+	public final Datastore datastore = Morphia.createDatastore(MongoClients.create(uri), "CareerQ");
+	public UserService() {
+		// map the classes in `model` directory to actual documents in the database
+		datastore.getMapper().mapPackage("model");
+		datastore.ensureIndexes();	
+	}
 	
+	// find user by email
+	public User findByEmail(String email) {
+		return datastore.find(User.class).filter(Filters.eq("email", email)).first();
+	}
 	
 	
 }

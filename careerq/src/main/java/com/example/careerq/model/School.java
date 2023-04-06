@@ -2,14 +2,11 @@ package com.example.careerq.model;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.mapping.Document;
+import dev.morphia.annotations.Entity;
 
-import com.example.careerq.model.Event;
-import com.example.careerq.model.User;
 
-@Document (collection = "users")
-@TypeAlias("school")
+
+@Entity(value = "users")
 public class School extends User {
 	private String schoolName;
 	

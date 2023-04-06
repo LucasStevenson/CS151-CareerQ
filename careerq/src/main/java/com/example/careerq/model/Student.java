@@ -1,14 +1,8 @@
 package com.example.careerq.model;
 
+import dev.morphia.annotations.Entity;
 
-import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.example.careerq.Queue;
-import com.example.careerq.model.User;
-
-@Document (collection = "users")
-@TypeAlias("student")
+@Entity(value = "users")
 public class Student extends User {
 	private String name;
 	

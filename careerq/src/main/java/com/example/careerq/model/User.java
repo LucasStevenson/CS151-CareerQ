@@ -1,9 +1,9 @@
 package com.example.careerq.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
 
-@Document(collection = "users")
+@Entity(value = "users")
 public class User {
 	@Id
 	private String id;

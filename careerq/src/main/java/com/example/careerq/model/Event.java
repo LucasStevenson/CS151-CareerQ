@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.example.careerq.Queue;
-import com.example.careerq.model.Company;
 
-@Document(collection = "events")
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+
+@Entity(value = "events")
 public class Event {
 	@Id
 	private String eventID;

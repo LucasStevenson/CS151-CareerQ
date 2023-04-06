@@ -1,5 +1,4 @@
 package com.example.careerq;
-
 import java.util.LinkedList;
 
 public class Queue<T> {
