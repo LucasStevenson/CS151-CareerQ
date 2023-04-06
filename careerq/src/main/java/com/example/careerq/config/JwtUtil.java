@@ -20,28 +20,28 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtUtil {
-	@Value("${jwt.secretKey}")
-	private String secretKey; // the key used to sign the tokens
-	
-	@Value("${jwt.tokenLifetime}")
-	private int tokenLifetime; // amount of time a token is valid
-	
-	public String generateToken(User user) {
+    @Value("${jwt.secretKey}")
+    private String secretKey; // the key used to sign the tokens
+
+    @Value("${jwt.tokenLifetime}")
+    private int tokenLifetime; // amount of time a token is valid
+
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", user.getId()); // jwt subject
         claims.put("created", new Date());
         return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(new Date(System.currentTimeMillis() + tokenLifetime))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
+            .setClaims(claims)
+            .setExpiration(new Date(System.currentTimeMillis() + tokenLifetime))
+            .signWith(SignatureAlgorithm.HS512, secretKey)
+            .compact();
     }
 
     public boolean validateToken(String token) {
-    	// PROBABLY SHOULD REPLACE THE PRINT STATEMENTS WITH EXCEPTIONS
-    	// don't feel like doing it right now, but the process should be something like
-    	// create a custom exception, like (for example) `InvalidTokenException`
-    	// for all the catch statements, throw InvalidTokenException with the message
+        // PROBABLY SHOULD REPLACE THE PRINT STATEMENTS WITH EXCEPTIONS
+        // don't feel like doing it right now, but the process should be something like
+        // create a custom exception, like (for example) `InvalidTokenException`
+        // for all the catch statements, throw InvalidTokenException with the message
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
