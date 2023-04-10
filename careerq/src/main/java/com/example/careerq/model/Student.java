@@ -9,7 +9,7 @@ public class Student extends User {
 	public Student() {}
 	
 	public Student(String email, String password, String name) {
-		super(email, password);
+		super(email, password, "student");
 		this.name = name;
 	}
 	

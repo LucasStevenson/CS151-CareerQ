@@ -9,12 +9,14 @@ public class User {
 	private String id;
 	private String email;
 	private String password;
+	private String userType;
 	
 	public User() {}
 	
-	public User(String email, String password) {
+	public User(String email, String password, String userType) {
 		this.email = email;
 		this.password = password;
+		this.userType = userType;
 	}
 	
 	// getters and setters
@@ -42,6 +44,12 @@ public class User {
 		this.password = password;
 	}
 	
+	public String getUserType() {
+		return userType;
+	}
 	
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
 	
 }

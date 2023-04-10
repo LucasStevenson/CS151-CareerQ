@@ -13,7 +13,7 @@ public class Company extends User {
 	public Company() {}
 	
 	public Company(String email, String password, String companyName) {
-		super(email, password);
+		super(email, password, "company");
 		this.companyName = companyName;
 	}
 	
