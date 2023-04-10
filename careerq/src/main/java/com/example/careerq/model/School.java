@@ -13,7 +13,7 @@ public class School extends User {
 	public School() {}
 	
 	public School(String email, String password, String schoolName) {
-		super(email, password);
+		super(email, password, "school");
 		this.schoolName = schoolName;
 	}
 	

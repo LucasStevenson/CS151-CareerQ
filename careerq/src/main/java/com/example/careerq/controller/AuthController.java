@@ -2,6 +2,7 @@ package com.example.careerq.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.careerq.config.JwtUtil;
 import com.example.careerq.model.User;
 import com.example.careerq.service.EventService;
 import com.example.careerq.service.UserService;
@@ -15,12 +16,12 @@ import org.mindrot.jbcrypt.BCrypt;
 // THIS CODE DOES NOT CURRENTLY WORK AND IS STILL A WORK IN PROGRESS
 
 /* Todo:
- * Complete the code for login. It's almost done, just need to generate the JWT 
  * Write the code for registering. Already put the process in comments, just need to turn into java code
  */
 
 public class AuthController {
     private static UserService userService;
+    private static JwtUtil jwtutil;
 
     public static void main(String[] args) {
         post("/login", (req, res) -> {
@@ -41,7 +42,7 @@ public class AuthController {
             }
 
             // create and assign a token that is valid for some amount of time (TBD)
-            String token = "CREATE JSON WEB TOKEN HERE";
+            String token = jwtutil.generateToken(user);
 
             res.status(200);
             return token;
