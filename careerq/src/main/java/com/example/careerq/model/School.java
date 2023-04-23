@@ -2,11 +2,6 @@ package com.example.careerq.model;
 
 import java.util.Date;
 
-import dev.morphia.annotations.Entity;
-
-
-
-@Entity(value = "users")
 public class School extends User {
 	private String schoolName;
 	

@@ -1,11 +1,8 @@
 package com.example.careerq.model;
 
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
+import java.util.Random;
 
-@Entity(value = "users")
 public class User {
-	@Id
 	private String id;
 	private String email;
 	private String password;
@@ -14,6 +11,7 @@ public class User {
 	public User() {}
 	
 	public User(String email, String password, String userType) {
+		this.id = Integer.toHexString(new Random().nextInt(1000000000) + 1); // generate number between 1 and 1B. convert into into hexadecimal string
 		this.email = email;
 		this.password = password;
 		this.userType = userType;
@@ -50,6 +48,11 @@ public class User {
 	
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", userType=" + userType + "]";
 	}
 	
 }
