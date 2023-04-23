@@ -3,15 +3,12 @@ package com.example.careerq.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import com.example.careerq.Queue;
 
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
 
-@Entity(value = "events")
 public class Event {
-	@Id
 	private String eventID;
 	private String host;
 	private Date startTime;
@@ -22,6 +19,7 @@ public class Event {
 	public Event() {}
 	
 	public Event(String host, Date startTime, Date endTime) {
+		this.eventID = Integer.toHexString(new Random().nextInt(1000000000) + 1); // generate number between 1 and 1B. convert into into hexadecimal string 
 		this.host = host;
 		this.startTime = startTime;
 		this.endTime = endTime;

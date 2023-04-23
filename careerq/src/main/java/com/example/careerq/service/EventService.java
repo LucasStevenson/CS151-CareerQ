@@ -1,33 +1,34 @@
 package com.example.careerq.service;
 
-
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.careerq.model.Event;
-import com.mongodb.client.MongoClients;
 
-import dev.morphia.Datastore;
-import dev.morphia.Morphia;
 
 public class EventService {
-	String uri;
-	// datastore that will connect to the mongo database
-	public final Datastore datastore = Morphia.createDatastore(MongoClients.create(uri), "CareerQ");
-	public EventService() {
-		// map the classes in `model` directory to actual documents in the database
-		datastore.getMapper().mapPackage("model");
-		datastore.ensureIndexes();	
-	}
+	private static Map<String, Event> events = new HashMap<>(); // maps eventID's to their respective event
 	
 	// returns a list of all the events in the database
 	public List<Event> getAllEvents() {
-		List<Event> events= new ArrayList<>();
-		Iterator<Event> it = datastore.find(Event.class).iterator();
-		while (it.hasNext()) {
-			events.add(it.next());
-		}
-		return events;
+		return new ArrayList<>(events.values());
+	}
+	
+	public Event getEvent(String eventID) {
+		return events.get(eventID);
+	}
+	
+	public void removeEvent(String eventID) {
+		events.remove(eventID);
+	}
+	
+	public void updateEvent(String eventID, Event updatedEvent) { // replace event with updatedEvent
+		events.put(eventID, updatedEvent);
+	}
+	
+	public void createEvent(Event event) {
+		events.put(event.getEventID(), event);
 	}
 }

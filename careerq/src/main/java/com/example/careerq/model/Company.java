@@ -2,9 +2,6 @@ package com.example.careerq.model;
 
 import com.example.careerq.Queue;
 
-import dev.morphia.annotations.Entity;
-
-@Entity(value = "users")
 public class Company extends User {
 
 	private String companyName;

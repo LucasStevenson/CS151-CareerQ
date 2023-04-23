@@ -1,8 +1,5 @@
 package com.example.careerq.model;
 
-import dev.morphia.annotations.Entity;
-
-@Entity(value = "users")
 public class Student extends User {
 	private String name;
 	
