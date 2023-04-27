@@ -34,26 +34,20 @@ public class EventsController {
 		// create an event
 		post("/create-event", (req, res) -> {
 			JsonObject json = JsonParser.parseString(req.body()).getAsJsonObject();
-			String response = eventService.createEvent(json, req.headers("Authorization"));
-			if (response.equals("JWT is missing/invalid") || response.equals("You are not allowed to create events")) {
-				res.status(401);
-			} else if (response.equals("Must provide a start and end time for the event")) {
-				res.status(400);
-			}
-			res.status(200);
-			return response;
+			Object[] response = eventService.createEvent(json, req.headers("Authorization"));
+			String msg = (String)response[0];
+			int errCode = (Integer) response[1];
+			res.status(errCode);
+			return msg;
 		});
 
 		// removes a particular event
 		delete("/remove-event/:id", (req, res) -> {
-			String response = eventService.removeEvent(req.params(":id"), req.headers("Authorization"));
-			if (response.equals("JWT is missing/invalid")) {
-				res.status(401);
-			} else if (response.equals("You do not have permission to remove this event")) {
-				res.status(403);
-			}
-			res.status(200);
-			return response;
+			Object[] response = eventService.removeEvent(req.params(":id"), req.headers("Authorization"));
+			String msg = (String) response[0];
+			int errCode = (Integer) response[1];
+			res.status(errCode);
+			return msg;
 		});
 
 		// accept a company on the event waitlist

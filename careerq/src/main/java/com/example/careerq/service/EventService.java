@@ -26,39 +26,39 @@ public class EventService {
 		return events.get(eventID);
 	}
 
-	public String removeEvent(String eventID, String authHeader) {
+	public Object[] removeEvent(String eventID, String authHeader) {
 		// make sure the user has a jwt
 		DecodedJWT decodedJWT = jwtutil.decodeJWT(authHeader);
 		if (decodedJWT == null) {
-			return "JWT is missing/invalid";
+			return new Object[]{"JWT is missing/invalid", 401};
 		}
 		// check that the user requesting is the host of the event
 		String hostEmail = decodedJWT.getClaim("email").asString();
 		if (!this.getEvent(eventID).getHost().equals(hostEmail)) {
-			return "You do not have permission to remove this event";
+			return new Object[]{"You do not have permission to remove this event", 403};
 		}
 		// if they are, then remove the event
 		events.remove(eventID);
-		return "Event removed successfully";
+		return new Object[]{"Event removed successfully", 200};
 	}
 
 	public void updateEvent(String eventID, Event updatedEvent) { // replace event with updatedEvent
 		events.put(eventID, updatedEvent);
 	}
 
-	public String createEvent(JsonObject json, String authHeader) {
+	public Object[] createEvent(JsonObject json, String authHeader) {
 		DecodedJWT decodedJWT = jwtutil.decodeJWT(authHeader);
 		if (decodedJWT == null) {
-			return "JWT is missing/invalid";
+			return new Object[]{"JWT is missing/invalid", 401};
 		}
 		// only School users can create events
 		String hostEmail = decodedJWT.getClaim("email").asString();
 		if (!userService.findByEmail(hostEmail).getUserType().equals("school")) {
-			return "You are not allowed to create events";
+			return new Object[]{"You are not allowed to create events", 401};
 		}
 		// check to make request has required fields
 		if (!(json.has("startTime") && json.has("endTime"))) {
-			return "Must provide a start and end time for the event";
+			return new Object[]{"Must provide a start and end time for the event", 400};
 		}
 		// going to assume times are given as strings in the format: MM/DD/YYYY
 		Date startTime = new Date(json.get("startTime").getAsString());
@@ -66,6 +66,6 @@ public class EventService {
 		// create the event
 		Event newEvent = new Event(hostEmail, startTime, endTime);
 		events.put(newEvent.getEventID(), newEvent);
-		return "Successfully created new event";
+		return new Object[]{"Successfully created new event", 200};
 	}
 }
