@@ -6,77 +6,61 @@ import com.example.careerq.config.JwtUtil;
 import com.example.careerq.model.Event;
 import com.example.careerq.service.EventService;
 import com.example.careerq.service.UserService;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import spark.Request;
 import spark.Response;
 
 import static spark.Spark.*;
 
+import java.util.Date;
+
 public class EventsController {
 	private EventService eventService = new EventService();
-	private JwtUtil jwtutil = JwtUtil.getInstance();
-	private UserService userService = new UserService();
 
 	public void addRoutes() {
 		// returns a list of all the events
 		get("/events", (req, res) -> {
 			return eventService.getAllEvents();
 		});
-		
+
+		// returns a list of events that a particular school hosts
+		// get("/my-events", (req, res) -> {
+		// we will filter what results to show based on the data in the jwt
+		//
+		// });
+
 		// create an event
-		post("/create-event", (req, res) -> { // TODO: finish this
-			DecodedJWT decodedJWT = this.decodeJWT(req.headers("Authorization"));
-			if (decodedJWT == null) {
+		post("/create-event", (req, res) -> {
+			JsonObject json = JsonParser.parseString(req.body()).getAsJsonObject();
+			String response = eventService.createEvent(json, req.headers("Authorization"));
+			if (response.equals("JWT is missing/invalid") || response.equals("You are not allowed to create events")) {
 				res.status(401);
-				return "JWT is missing/invalid";
+			} else if (response.equals("Must provide a start and end time for the event")) {
+				res.status(400);
 			}
-			// only School users can create events
-			String userEmail = decodedJWT.getClaim("email").asString();
-			if (!userService.findByEmail(userEmail).getUserType().equals("school")) {
-				res.status(401);
-				return "You are not allowed to create events";
-			}
-			return "poggers!";
-			// create the event
-			//Event newEvent = new Event(userEmail, startTime, endTime);
+			res.status(200);
+			return response;
 		});
 
 		// removes a particular event
 		delete("/remove-event/:id", (req, res) -> {
-			// make sure the user has a jwt
-			DecodedJWT decodedJWT = this.decodeJWT(req.headers("Authorization"));
-			if (decodedJWT == null) {
+			String response = eventService.removeEvent(req.params(":id"), req.headers("Authorization"));
+			if (response.equals("JWT is missing/invalid")) {
 				res.status(401);
-				return "JWT is missing/invalid";
-			}
-
-			// check that the user requesting is the host of the event
-			String eventID = req.params(":id");
-			String hostEmail = decodedJWT.getClaim("email").asString();
-			if (!eventService.getEvent(eventID).getHost().equals(hostEmail)) {
+			} else if (response.equals("You do not have permission to remove this event")) {
 				res.status(403);
-				return "You do not have permission to remove this event";
 			}
-			// if they are, then remove the event
-			eventService.removeEvent(eventID);
 			res.status(200);
-			return "Event removed successfully";
+			return response;
 		});
+
+		// accept a company on the event waitlist
+		// post("", (req, res) -> {
+		// on the frontend, this will just be a button that calls this endpoint
+		// });
+
 	}
-	
-	private DecodedJWT decodeJWT(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-			return null;
-		}
-		// verify that the jwt is valid
-		String token = authorizationHeader.substring(7);
-		DecodedJWT decodedJWT;
-		try {
-			decodedJWT = jwtutil.validateToken(token);
-		} catch (JWTVerificationException ex) {
-			return null;
-		}
-		return decodedJWT;
-	}
-		
+
 }

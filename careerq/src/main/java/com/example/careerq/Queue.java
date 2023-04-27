@@ -1,7 +1,14 @@
 package com.example.careerq;
 import java.util.LinkedList;
 
-public class Queue<T> {
+import com.example.careerq.model.User;
+
+enum QueueStatus {
+	PAUSED,
+	ACTIVE
+}
+
+public class Queue<T extends User> {
 	private LinkedList<T> people;
 	private int maxQueueSize;
 	private QueueStatus status;
@@ -23,10 +30,6 @@ public class Queue<T> {
 	}
 	
 	public void add(T entity) {
-		
-	}
-	
-	public void prioritize(T entity) {
 		
 	}
 }
