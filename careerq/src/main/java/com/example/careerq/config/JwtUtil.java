@@ -40,9 +40,20 @@ public class JwtUtil {
         		.withExpiresAt(new Date(System.currentTimeMillis() + tokenLifetime*1000)) // jwt expires in one hour
         		.sign(algorithm);
     }
-
-    public DecodedJWT validateToken(String token) throws JWTVerificationException {
-    	JWTVerifier verifier = JWT.require(algorithm).build();
-    	return verifier.verify(token);
-    }
+    
+    public DecodedJWT decodeJWT(String authorizationHeader) {
+		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+			return null;
+		}
+		// verify that the jwt is valid
+		String token = authorizationHeader.substring(7);
+		JWTVerifier verifier = JWT.require(algorithm).build();
+		DecodedJWT decodedJWT;
+		try {
+			decodedJWT = verifier.verify(token);
+		} catch (JWTVerificationException ex) {
+			return null;
+		}
+		return decodedJWT;
+	}
 }
