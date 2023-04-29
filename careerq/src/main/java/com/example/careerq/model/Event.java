@@ -40,6 +40,11 @@ public class Event {
 			participatingCompanies.add(company);
 		}
 	}
+	
+	// adds a company to the waitingList
+	public boolean addToWaitingList(Company company) { // returns true if successful
+		return waitingList.add(company) != null;
+	}
 
 	// getters and setters
 	public String getEventID() {

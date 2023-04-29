@@ -10,20 +10,33 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.careerq.config.JwtUtil;
 import com.example.careerq.model.Company;
 import com.example.careerq.model.Event;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 
 public class EventService {
-	JwtUtil jwtutil = JwtUtil.getInstance();
-	UserService userService = new UserService();
+	private JwtUtil jwtutil = JwtUtil.getInstance();
+	private UserService userService = new UserService();
 	private static Map<String, Event> events = new HashMap<>(); // maps eventID's to their respective event
 
-	// returns a list of all the events in the database
-	public List<Event> getAllEvents() {
-		return new ArrayList<>(events.values());
+	private ObjectMapper objectMapper = new ObjectMapper();
+	
+	// returns a list of all the events in the database where each event is a json object
+	public List<String> getAllEvents() throws JsonProcessingException {
+		List<String> allEvents = new ArrayList<>();
+		for (Event ev : events.values()) {
+			try {
+				allEvents.add(objectMapper.writeValueAsString(ev));
+			} catch (JsonProcessingException jspe) {
+				jspe.printStackTrace();
+			}
+		}
+		return allEvents;
 	}
 
-	public Event getEvent(String eventID) {
-		return events.get(eventID);
+	// returns json string of the specified Event
+	public String getEvent(String eventID) throws JsonProcessingException {
+		return objectMapper.writeValueAsString(events.get(eventID));
 	}
 
 	public Object[] removeEvent(String eventID, String authHeader) {
@@ -34,7 +47,7 @@ public class EventService {
 		}
 		// check that the user requesting is the host of the event
 		String hostEmail = decodedJWT.getClaim("email").asString();
-		if (!this.getEvent(eventID).getHost().equals(hostEmail)) {
+		if (!events.get(eventID).getHost().equals(hostEmail)) {
 			return new Object[]{"You do not have permission to remove this event", 403};
 		}
 		// if they are, then remove the event
@@ -67,5 +80,22 @@ public class EventService {
 		Event newEvent = new Event(hostEmail, startTime, endTime);
 		events.put(newEvent.getEventID(), newEvent);
 		return new Object[]{"Successfully created new event", 200};
+	}
+	
+	public Object[] joinEventWaitlist(String eventID, String authHeader) {
+		DecodedJWT decodedJWT = jwtutil.decodeJWT(authHeader);
+		if (decodedJWT == null) {
+			return new Object[]{"JWT is missing/invalid", 401};
+		}
+		// make sure that the user is of type company
+		String userEmail = decodedJWT.getClaim("email").asString();
+		if (!userService.findByEmail(userEmail).getUserType().equals("company")) {
+			return new Object[]{"You are not allowed to join this event", 401};
+		}		
+		// try to add the company to the event waitinglist
+		Event event = events.get(eventID);
+		boolean isSuccessful = event.addToWaitingList((Company)userService.findByEmail(userEmail));
+		if (!isSuccessful) return new Object[]{"Failed to join event waitlist. Either it is full or are you already participating", 400};
+		return new Object[]{"Successfully joined the event waitlist", 200};
 	}
 }
