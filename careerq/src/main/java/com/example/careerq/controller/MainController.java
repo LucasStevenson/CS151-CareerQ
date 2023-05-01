@@ -11,7 +11,9 @@ public class MainController {
         
         AuthController authController = new AuthController();
         EventsController eventsController = new EventsController();
+        QueueController queueController = new QueueController();
         authController.addRoutes();
         eventsController.addRoutes();
+        queueController.addRoutes();
     }
 }

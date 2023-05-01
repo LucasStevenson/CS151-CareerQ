@@ -32,7 +32,7 @@ public class Student extends User {
 		
 	}
 	
-	public Queue<Student> viewQueue(Company company) { // idk if this method is even necessary
+	public Queue<User> viewQueue(Company company) { // idk if this method is even necessary
 		return company.getQueue();
 	}
 	

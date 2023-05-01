@@ -6,7 +6,7 @@ import com.example.careerq.QueueStatus;
 public class Company extends User {
 
 	private String companyName;
-	private Queue<Student> queue = new Queue<>();
+	private Queue<User> queue = new Queue<>();
 	
 	public Company() {}
 	
@@ -15,7 +15,7 @@ public class Company extends User {
 		this.companyName = companyName;
 	}
 	
-	public Queue<Student> getQueue() {
+	public Queue<User> getQueue() {
 		return queue;
 	}
 	
@@ -32,7 +32,7 @@ public class Company extends User {
 			return false;
 		}
 		User addedUser = queue.add(s);
-		return addedUser == null;
+		return addedUser != null;
 	}
 	
 	public void removeFromQueue(Student s) {
