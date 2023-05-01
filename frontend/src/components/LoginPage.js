@@ -6,14 +6,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
-  // update email and password state
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
   // handle login logic (make post request to backend)
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,7 +39,7 @@ const LoginPage = () => {
                 type="email"
                 placeholder="Enter email"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </Form.Group>
@@ -58,7 +50,7 @@ const LoginPage = () => {
                 type="password"
                 placeholder="Password"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </Form.Group>
