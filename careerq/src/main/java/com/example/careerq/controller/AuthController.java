@@ -24,14 +24,12 @@ public class AuthController {
     		JsonObject json = JsonParser.parseString(req.body()).getAsJsonObject();
     	    String email = json.get("email").getAsString();
     	    String password = json.get("password").getAsString();
-
     	    // check if the email exists
     	    User user = userService.findByEmail(email);
     	    if (user == null) {
     	        res.status(400);
     	        return "Email doesn't exist";
     	    }
-
     	    try {
     	        // check to see if the password is valid
     	        if (!BCrypt.checkpw(password, user.getPassword())) {
@@ -43,7 +41,6 @@ public class AuthController {
     	        res.status(500);
     	        return "Error while trying to validate password";
     	    }
-
     	    // create and assign a token that is valid for some amount of time (TBD)
     	    String token = jwtutil.generateToken(user);
 
@@ -60,21 +57,17 @@ public class AuthController {
     	    	res.status(400);
     	    	return msg;
     	    }
-    	    
     	    String email = json.get("email").getAsString();
     	    String password = json.get("password").getAsString();
     	    String name = json.get("name").getAsString();
     	    String userType = json.get("userType").getAsString();
-    	    
             // check if email is already in database
     		if (userService.findByEmail(email) != null) {
     			res.status(400);
     			return "Email already exists";
     		}
-
             // hash the password
     		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-
             // create a new user and save to db
     		User newUser = null;
     		switch (userType) {
@@ -88,7 +81,6 @@ public class AuthController {
     				newUser = userService.save(new School(email, hashedPassword, name));
     				break;
     		}
-    		
     		return newUser;
         });
     }

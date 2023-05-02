@@ -30,6 +30,10 @@ public class Queue<T extends User> {
 		return status;
 	}
 	
+	public boolean contains(T entity) {
+		return people.contains(entity);
+	}
+	
 	// remove a person from the queue
 	public void remove(T entity) {
 		people.remove(entity);
