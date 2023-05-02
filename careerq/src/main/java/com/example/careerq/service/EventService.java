@@ -10,33 +10,27 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.careerq.config.JwtUtil;
 import com.example.careerq.model.Company;
 import com.example.careerq.model.Event;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class EventService {
 	private JwtUtil jwtutil = JwtUtil.getInstance();
 	private UserService userService = new UserService();
 	private static Map<String, Event> events = new HashMap<>(); // maps eventID's to their respective event
-
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private Gson gson = new Gson(); // used for writing objects as json strings
 	
-	// returns a list of all the events in the database where each event is a json object
-	public List<String> getAllEvents() throws JsonProcessingException {
+	// returns a list of all the events in the database where each event is a json string
+	public List<String> getAllEvents() {
 		List<String> allEvents = new ArrayList<>();
 		for (Event ev : events.values()) {
-			try {
-				allEvents.add(objectMapper.writeValueAsString(ev));
-			} catch (JsonProcessingException jspe) {
-				jspe.printStackTrace();
-			}
+			allEvents.add(gson.toJson(ev));
 		}
 		return allEvents;
 	}
 
 	// returns json string of the specified Event
-	public String getEvent(String eventID) throws JsonProcessingException {
-		return objectMapper.writeValueAsString(events.get(eventID));
+	public String getEvent(String eventID) {
+		return gson.toJson(events.get(eventID));
 	}
 
 	public Object[] removeEvent(String eventID, String authHeader) {
@@ -95,7 +89,7 @@ public class EventService {
 		// try to add the company to the event waitinglist
 		Event event = events.get(eventID);
 		boolean isSuccessful = event.addToWaitingList((Company)userService.findByEmail(userEmail));
-		if (!isSuccessful) return new Object[]{"Failed to join event waitlist. Either it is full or are you already participating", 400};
+		if (!isSuccessful) return new Object[]{"Failed to join event waitlist because you are you already participating", 400};
 		return new Object[]{"Successfully joined the event waitlist", 200};
 	}
 }

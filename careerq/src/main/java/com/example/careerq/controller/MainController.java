@@ -18,8 +18,7 @@ public class MainController {
 			if (accessControlRequestMethod != null) {
 				res.header("Access-Control-Allow-Methods", accessControlRequestMethod);
 			}
-
-	        return "OK";
+			return "OK";
 		});
 
 		before((req, res) -> {
@@ -27,8 +26,7 @@ public class MainController {
 			res.header("Access-Control-Allow-Headers", "*");
 			res.type("application/json");
 		});
-		
-		
+
 		AuthController authController = new AuthController();
 		EventsController eventsController = new EventsController();
 		QueueController queueController = new QueueController();

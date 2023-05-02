@@ -5,14 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import com.example.careerq.Queue;
-
 public class Event {
 	private String eventID;
 	private String host;
 	private Date startTime;
 	private Date endTime;
-	private Queue<Company> waitingList = new Queue<>();
+	private List<Company> waitingList = new ArrayList<>();
 	private List<Company> participatingCompanies = new ArrayList<>();
 
 	public Event() {
@@ -43,7 +41,11 @@ public class Event {
 	
 	// adds a company to the waitingList
 	public boolean addToWaitingList(Company company) { // returns true if successful
-		return waitingList.add(company) != null;
+		if (waitingList.contains(company) || participatingCompanies.contains(company)) {
+			return false;
+		}
+		waitingList.add(company);
+		return true;
 	}
 
 	// getters and setters
@@ -79,7 +81,7 @@ public class Event {
 		this.endTime = endTime;
 	}
 
-	public Queue<Company> getWaitingList() {
+	public List<Company> getWaitingList() {
 		return waitingList;
 	}
 
