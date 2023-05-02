@@ -25,10 +25,13 @@ const RegisterPage = () => {
                 "userType": userType
             })
         });
-        console.log(rawResponse.status);
-        let jsonResponse = await rawResponse.text();
-        console.log(jsonResponse);
-        // do something with the response
+        let res = await rawResponse.text();
+        if (!rawResponse.ok) { // if the http status code is not 2xx
+            // res holds the error message
+            throw new Error(res);
+        }
+        // login was successful
+        console.log(res)
     } catch (err) {   
         setErrMsg(err.message);
     }
@@ -87,6 +90,12 @@ const RegisterPage = () => {
         <Button variant="primary" type="submit">
           Register
         </Button>
+
+        {errMsg && (
+          <div className="alert alert-danger mt-3" role="alert">
+            {errMsg}
+          </div>
+        )}
       </Form>
     </Container>
     );

@@ -20,13 +20,14 @@ const LoginPage = () => {
                 "password": password
             })
         });
-        console.log(rawResponse.status);
-        let res = await rawResponse.text();
-        if (rawResponse.status === 200) {
-            document.cookie = `token=Bearer ${res}`;
+        let res = await rawResponse.text(); 
+        if (!rawResponse.ok) { // if the http status code is not 2xx
+            // `res` holds the error message
+            throw new Error(res);
         }
-        console.log(res);
-        // do something with the response
+        // at this point, the login was successful
+        // we are given the jwt (stored in `res`)
+        document.cookie = `token=Bearer ${res}`; // store jwt in cookies
     } catch (err) {   
         setErrMsg(err.message);
     }
