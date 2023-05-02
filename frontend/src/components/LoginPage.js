@@ -21,8 +21,11 @@ const LoginPage = () => {
             })
         });
         console.log(rawResponse.status);
-        let jsonResponse = await rawResponse.text();
-        console.log(jsonResponse);
+        let res = await rawResponse.text();
+        if (rawResponse.status === 200) {
+            document.cookie = `token=Bearer ${res}`;
+        }
+        console.log(res);
         // do something with the response
     } catch (err) {   
         setErrMsg(err.message);
