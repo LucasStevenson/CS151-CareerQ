@@ -69,19 +69,19 @@ public class AuthController {
             // hash the password
     		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             // create a new user and save to db
-    		User newUser = null;
     		switch (userType) {
     			case "student":
-    				newUser = userService.save(new Student(email, hashedPassword, name));
+    				userService.save(new Student(email, hashedPassword, name));
     				break;
     			case "company":
-    				newUser = userService.save(new Company(email, hashedPassword, name));
+    				userService.save(new Company(email, hashedPassword, name));
     				break; 
     			case "school":
-    				newUser = userService.save(new School(email, hashedPassword, name));
+    				userService.save(new School(email, hashedPassword, name));
     				break;
     		}
-    		return newUser;
+    		res.status(200);
+    		return "Successfully created account";
         });
     }
 }
