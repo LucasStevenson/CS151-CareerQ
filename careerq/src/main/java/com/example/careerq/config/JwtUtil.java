@@ -13,7 +13,7 @@ import com.example.careerq.model.User;
 public class JwtUtil {
 	private VariablesConfig config = VariablesConfig.getInstance();
     private String secretKey; // the key used to sign the tokens (READ FROM CONFIG FILE)
-    private int tokenLifetime; // amount of seconds a token is valid (READ FROM CONFIG FILE)
+    private int tokenLifetime; // amount of milliseconds a token is valid (READ FROM CONFIG FILE)
     private Algorithm algorithm; // the algorithm and secret key used to sign/verify tokens
     private static JwtUtil instance; // singleton design pattern to only create one instance of this class
     

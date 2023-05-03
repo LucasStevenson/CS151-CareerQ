@@ -80,6 +80,7 @@ public class AuthController {
     				userService.save(new School(email, hashedPassword, name));
     				break;
     		}
+    		res.status(200);
     		return "Successfully created account";
         });
     }
