@@ -5,9 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 //import Events from "./components/Events";
-import StudentPage from "./components/StudentPage";
+import StudentPage from "./pages/StudentPage";
 import AdminPage from "./components/AdminPage";
-import CompanyPage from "./components/CompanyPage";
+import CompanyPage from "./pages/CompanyPage";
 
 function App() {
   return (
