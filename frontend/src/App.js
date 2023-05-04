@@ -1,14 +1,13 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-//import Events from "./components/Events";
-
+import EventsPage from "./pages/EventsPage";
 import StudentPage from "./pages/StudentPage";
-import AdminPage from "./pages/AdminPage";
-import CompanyPage from "./pages/CompanyPage";
+import AdminPage from "./components/AdminPage";
+import CompanyPage from "./components/CompanyPage";
+import SingleEvent from "./components/SingleEvent";
 
 function App() {
   return (
@@ -19,6 +18,8 @@ function App() {
             <Route path="/student" element={<StudentPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/company" element={<CompanyPage />} /> 
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/events/:id" element={<SingleEvent />} />
         </Routes>
     </Router>
   )
