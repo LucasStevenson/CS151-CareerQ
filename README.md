@@ -3,11 +3,13 @@
 ### Team 8: James Kim, Lucas Stevenson, Rio Taiga ###
 
 ## Proposal Contributions ##
+ * Rio Taiga - On the Proposal page, edited bullet points on Operations for what School/Admin and Company Recruiter should be able to do in the Dashboard. Also provided comment on how the Functionality is supposed to be.
 
 ## Project Presentation Contributions ##
+ * Rio Taiga - Introduction of the project and the purpose of it, discussing the portions of Student Dashboard and Company Dashboard.
 
 ## Code and Report Contributions ##
-
+ * Rio Taiga - Created Student Dashboard, Company Dashboard using GUI features, and created Use Case Diagram as well as State Diagram. 
 
 ## Problem/Issue to Resolve ##
 
