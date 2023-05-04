@@ -6,7 +6,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let rawResponse = await fetch(`http://localhost:8080/events`, {
+      let rawResponse = await fetch(`http://localhost:8080/student`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
