@@ -1,0 +1,45 @@
+.actionButton {
+    width: 70px; 
+    margin-bottom: 5px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .addButton {
+    width: 150px;
+  }
+
+.contentTable{
+  border-collapse: collapse;
+  margin: 25px 0;
+  min-width: 400px;
+}
+
+.contentTable thead tr{
+  background-color: #3B71CA;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.contentTable th,
+.contentTable td{
+  padding: 15px 40px;
+}
+
+.contentTable tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+
+/*Scrolling is not working at the moment*/
+.scrollableTbody {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
