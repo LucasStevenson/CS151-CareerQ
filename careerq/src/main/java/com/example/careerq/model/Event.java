@@ -1,8 +1,10 @@
 package com.example.careerq.model;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import com.google.common.hash.Hashing;
 
 public class Event {
 	private String eventID;
@@ -17,13 +19,11 @@ public class Event {
 	}
 
 	public Event(String hostEmail, String day, String startTime, String endTime) {
-		this.eventID = Integer.toHexString(new Random().nextInt(1000000000) + 1); // generate number between 1 and 1B.
-																					// convert into into hexadecimal
-																					// string
 		this.host = hostEmail;
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.eventID = Hashing.sha256().hashString(host+day+startTime+endTime, StandardCharsets.UTF_8).toString().substring(0,15);
 	}
 
 	// removes a specific company from an event
