@@ -10,6 +10,7 @@
 
 ## Code and Report Contributions ##
  * Rio Taiga - Created Student Dashboard, Company Dashboard using GUI features, and created Use Case Diagram as well as State Diagram. 
+ * Lucas Stevenson - Implemented the backend using Java Spark and managed user authorization with JsonWebTokens. Also created the register and login page on top of writing code on the frontend to connect to the backend.
 
 ## Problem/Issue to Resolve ##
 
