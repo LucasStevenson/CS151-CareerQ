@@ -2,4 +2,4 @@ careerq/.settings/
 careerq/.classpath
 careerq/.project
 careerq/src/main/resources/config.properties
-careerq/target/classes/*
+careerq/target/
