@@ -22,7 +22,7 @@ public class EventService {
     public EventService() {
 		// add some default data
     	Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023", "12PM", "3PM");
-		Event e2 = new Event("sfsu@sjsu.edu", "09/28/2023", "2PM", "4PM");
+		Event e2 = new Event("sfsu@sfsu.edu", "09/28/2023", "2PM", "4PM");
 		Event e3 = new Event("berkeley@berkeley.edu", "10/10/2023", "9AM", "2PM");
 		events.put(e1.getEventID(), e1);
 		events.put(e2.getEventID(), e2);
@@ -119,5 +119,20 @@ public class EventService {
 		boolean isSuccessful = event.addToWaitingList((Company)userService.findByEmail(userEmail));
 		if (!isSuccessful) return new Object[]{"Failed to join event waitlist because you are you already participating", 400};
 		return new Object[]{"Successfully joined the event waitlist", 200};
+	}
+	
+	public Object[] acceptCompany(String eventID, String companyEmail, String authHeader) {
+		DecodedJWT decodedJWT = jwtutil.decodeJWT(authHeader);
+		if (decodedJWT == null) {
+			return new Object[]{"JWT is missing/invalid", 401};
+		}
+		String userEmail = decodedJWT.getClaim("email").asString();
+		Event event = events.get(eventID);
+		if (!event.getHost().equals(userEmail)) {
+			return new Object[] {"You are not allowed to do this operation", 403};
+		}
+		Company company = (Company)userService.findByEmail(companyEmail);
+		event.removeFromWaitingList(company, true); // remove company from waitinglist and add to participatingCompanies list
+		return new Object[] {"Successfully added company to the event", 200};
 	}
 }

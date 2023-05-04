@@ -41,9 +41,14 @@ public class EventsController {
 		});
 
 		// accept a company on the event waitlist
-		// post("", (req, res) -> {
-		// on the frontend, this will just be a button that calls this endpoint
-		// });
+		// URL would look like: http://localhost:8080/events/23498dfsd/acceptCompany?companyEmail=company@company.com
+		 post("/events/:eventID/acceptCompany", (req, res) -> {
+			 //on the frontend, this will just be a button that calls this endpoint
+			 Object[] response = eventService.acceptCompany(req.params(":eventID"), req.queryParams("companyEmail"), req.headers("Authorization"));
+			res.status((Integer)response[1]);
+			return (String)response[0];
+			 
+		 });
 		
 		// company wants to join an event
 		post("/join-event/:eventID", (req, res) -> {
