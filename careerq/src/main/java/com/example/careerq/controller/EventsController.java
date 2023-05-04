@@ -21,10 +21,9 @@ public class EventsController {
 		});
 
 		// returns a list of events that a particular school hosts
-		// get("/my-events", (req, res) -> {
-		// we will filter what results to show based on the data in the jwt
-		//
-		// });
+		 get("/my-events", (req, res) -> {
+			 return eventService.getMyEvents(req.headers("Authorization"));
+		 });
 
 		// create an event
 		post("/create-event", (req, res) -> {

@@ -8,24 +8,30 @@ const EventManagement = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  const token = localStorage.getItem("token");
+
   // Delete event function
   // Does not work yet
-  const deleteEvent = (id) => {
+  const deleteEvent = async (id) => {
     console.log(id);
-    fetch(`http://localhost:8080/admin/${id}`, {
+    let rawResponse = await fetch(`http://localhost:8080/remove-event/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer {token}`
       },
-    });
+    })
+    let res = await rawResponse.json();
+    console.log(res);
   };
 
   useEffect(() => {
     async function fetchData() {
-      let rawResponse = await fetch(`http://localhost:8080/admin`, {
+      let rawResponse = await fetch(`http://localhost:8080/my-events`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
         },
       });
       let res = await rawResponse.json();
@@ -63,6 +69,7 @@ const EventManagement = () => {
               <tr>
                 <th>Event ID</th>
                 <th>Host</th>
+                <th>Day</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Waiting List</th>
@@ -72,172 +79,31 @@ const EventManagement = () => {
             </thead>
 
             <tbody className={styles.scrollableTbody}>
-              <tr>
-                <td>001</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
+            {events.map((event) => (
+              <tr key={event.eventID}>
+                <td>{event.eventID}</td>
+                <td>{event.host}</td>
+                <td>{event.day}</td>
+                <td>{event.startTime}</td>
+                <td>{event.endTime}</td>
+                <td>{event.waitingList.length}</td>
+                <td>{event.participatingCompanies.length}</td>
                 <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
+                  <Button className={styles.actionButton} variant="primary" size="sm">
                     Edit
                   </Button>
                   <Button
                     className={styles.actionButton}
                     variant="danger"
                     size="sm"
+                    onClick={() => deleteEvent(event.eventID)}
                   >
                     Delete
                   </Button>
                 </td>
               </tr>
-              <tr>
-                <td>002</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
-                <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className={styles.actionButton}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>001</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
-                <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className={styles.actionButton}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>001</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
-                <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className={styles.actionButton}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>001</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
-                <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className={styles.actionButton}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>001</td>
-                <td>SJSU</td>
-                <td>2023-01-01 10:00:00</td>
-                <td>2023-01-01 12:00:00</td>
-                <td>5</td>
-                <td>Company A, Company B</td>
-                <td>
-                  <Button
-                    className={styles.actionButton}
-                    variant="primary"
-                    size="sm"
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className={styles.actionButton}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-
-              {
-                //Populate the table with the events from the database
-                /* {events.map((event) => (
-                <tr key={event.eventID}>
-                  <td>{event.eventID}</td>
-                  <td>{event.host}</td>
-                  <td>{event.startTime}</td>
-                  <td>{event.endTime}</td>
-                  <td>{event.waitingList.join(', ')}</td>
-                  <td>{event.participatingCompanies.join(', ')}</td>
-                  <td>
-                  <Button className={styles.actionButton} variant="primary" size="sm" onClick={() => handleShowEdit(event)}>
-                    Edit
-                  </Button>
-                  <Button className={styles.actionButton} variant="danger" size="sm">
-                    Delete
-                  </Button>
-                </td>
-                </tr>
-              ))} */
-              }
+            ))}
+              
             </tbody>
           </table>
         </Col>
