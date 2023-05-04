@@ -45,7 +45,6 @@ public class AuthController {
     	    String token = jwtutil.generateToken(user);
 
     	    res.status(200);
-    	    res.header("Authorization", "Bearer " + token);
     	    return token;
         });
 
