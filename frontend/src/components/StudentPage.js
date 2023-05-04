@@ -1,37 +1,47 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
+// Student Dashboard
 const StudentPage = () => {
-  const [events, setEvents] = useState([]);
+  const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      let rawResponse = await fetch(`http://localhost:8080/student`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      let res = await rawResponse.json();
-      setEvents(res);
+      try {
+        const response = await fetch(`http://localhost:8080/companies`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setCompanies(data);
+        } else {
+          throw new Error("Error fetching companies.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchData();
   }, []);
 
   return (
     <Container>
-      <h1 className="text-center my-5">Student Dashboard</h1>
+      <h1 className="my-4">Career Fair</h1>
       <Row>
-        {events.map((event) => (
-          <Col key={event.id}>
-            <Card className="mb-3">
-              <Card.Img variant="top" src={event.image_url} />
+        {companies.map((company) => (
+          <Col key={company.id} md={6} className="my-2">
+            <Card>
+              <Card.Header as="h5">{company.name}</Card.Header>
               <Card.Body>
-                <Card.Title>{event.title}</Card.Title>
-                <Card.Text>{event.description}</Card.Text>
-                <Button variant="primary" href={`/events/${event.id}`}>
-                  View Details
-                </Button>
+                <Card.Text>Queue Length: {company.queue.length}</Card.Text>
+                <Card.Text>
+                  Estimated Wait Time:{" "}
+                  {company.queue.length * company.wait_time_per_person} mins
+                </Card.Text>
+                <Button variant="primary">Join Queue</Button>
               </Card.Body>
             </Card>
           </Col>
@@ -40,5 +50,3 @@ const StudentPage = () => {
     </Container>
   );
 };
-
-export default StudentPage;
