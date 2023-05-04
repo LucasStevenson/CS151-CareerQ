@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import styles from "../Module/EventManagement.module.css";
 
 const EventManagement = () => {
@@ -229,7 +229,24 @@ const EventManagement = () => {
         <Modal.Header closeButton>
           <Modal.Title>Add Event</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{/* Form needs to be here */}</Modal.Body>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="eventHost">
+              <Form.Label>Host</Form.Label>
+              <Form.Control type="text" placeholder="Enter host" />
+            </Form.Group>
+
+            <Form.Group controlId="eventStartTime">
+              <Form.Label>Start Time</Form.Label>
+              <Form.Control type="datetime-local" />
+            </Form.Group>
+
+            <Form.Group controlId="eventEndTime">
+              <Form.Label>End Time</Form.Label>
+              <Form.Control type="datetime-local" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
