@@ -1,31 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import styles from "../Module/EventManagement.module.css";
 
 const EventManagement = () => {
-    const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [show, setShow] = useState(false);
 
-    useEffect(() => {
-      async function fetchData() {
-        let rawResponse = await fetch(`http://localhost:8080/admin`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        let res = await rawResponse.json();
-        setEvents(res);
-      }
-      fetchData();
-    }, []);
+  useEffect(() => {
+    async function fetchData() {
+      let rawResponse = await fetch(`http://localhost:8080/admin`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let res = await rawResponse.json();
+      setEvents(res);
+    }
+    fetchData();
+  }, []);
 
-    
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Container>
       <Row>
         <Col>
-        <h1> Event Management</h1>
-          <table>
+          <div className={styles.header}>
+            <h1> Event Management</h1>
+
+            <Button
+              className={styles.addButton}
+              variant="primary"
+              onClick={handleShow}
+            >
+              Add Event
+            </Button>
+          </div>
+
+          <table className={styles.contentTable}>
             <thead>
               <tr>
                 <th>Event ID</th>
@@ -34,10 +48,159 @@ const EventManagement = () => {
                 <th>End Time</th>
                 <th>Waiting List</th>
                 <th>Participating Companies</th>
+                <th> </th>
               </tr>
             </thead>
-            <tbody>
-              {events.map((event) => (
+
+            <tbody className={styles.scrollableTbody}>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>001</td>
+                <td>SJSU</td>
+                <td>2023-01-01 10:00:00</td>
+                <td>2023-01-01 12:00:00</td>
+                <td>5</td>
+                <td>Company A, Company B</td>
+                <td>
+                  <Button
+                    className={styles.actionButton}
+                    variant="primary"
+                    size="sm"
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    className={styles.actionButton}
+                    variant="danger"
+                    size="sm"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+
+              {
+                //Populate the table with the events from the database
+                /* {events.map((event) => (
                 <tr key={event.eventID}>
                   <td>{event.eventID}</td>
                   <td>{event.host}</td>
@@ -45,24 +208,37 @@ const EventManagement = () => {
                   <td>{event.endTime}</td>
                   <td>{event.waitingList.join(', ')}</td>
                   <td>{event.participatingCompanies.join(', ')}</td>
+                  <td>
+                  <Button className={styles.actionButton} variant="primary" size="sm">
+                    Edit
+                  </Button>
+                  <Button className={styles.actionButton} variant="danger" size="sm">
+                    Delete
+                  </Button>
+                </td>
                 </tr>
-              ))}
+              ))} */
+              }
             </tbody>
           </table>
+
+          {/* Modal (Popup) for adding an event */}
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <Button className={styles.button} variant="primary" size="lg" block>
-            Edit
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{/* Form needs to be here */}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
           </Button>
-        </Col>
-        <Col>
-          <Button className={styles.button} variant="danger" size="lg" block>
-            Delete
+          <Button variant="primary" onClick={handleClose}>
+            Add Event
           </Button>
-        </Col>
-      </Row>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
