@@ -34,10 +34,14 @@ public class Queue<T extends User> {
 		return people.contains(entity);
 	}
 	
-	// remove a person from the queue
+	// removes a specific person from the queue
 	public void remove(T entity) {
 		people.remove(entity);
 	}
+
+    public void removeFirst() {
+        people.remove();
+    }
 	
 	// add a person to the queue
 	public User add(T entity) {
