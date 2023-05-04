@@ -1,6 +1,7 @@
 package com.example.careerq.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,23 @@ public class EventService {
 			allEvents.add(gson.toJson(ev));
 		}
 		return allEvents;
+	}
+	
+	public List<String> getMyEvents(String authHeader) {
+		// make sure the user has a jwt
+		DecodedJWT decodedJWT = jwtutil.decodeJWT(authHeader);
+		if (decodedJWT == null) {
+			return Collections.emptyList();
+		}
+		List<String> myEvents = new ArrayList<>();
+		// get user email
+		String userEmail = decodedJWT.getClaim("email").asString();
+		for (Event ev : events.values()) {
+			if (ev.getHost().equals(userEmail)) {
+				myEvents.add(gson.toJson(ev));
+			}
+		}
+		return myEvents;
 	}
 
 	// returns json string of the specified Event
