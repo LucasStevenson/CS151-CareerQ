@@ -98,7 +98,7 @@ const SingleEvent = () => {
                     {eventInfo.waitingList.map((company) => (
                         <div>
                       <li key={company.id}>{company.companyName}</li>
-                      {token !== null && jwt_decode(token).uType === "school" && (
+                      {token !== null && jwt_decode(token).email === eventInfo.host && (
                         <Button variant="primary" onClick={() => acceptCompanyFromWaitList(eventInfo.eventID, company.email)} >
                         Accept
                       </Button>
