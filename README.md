@@ -1,5 +1,3 @@
-# CS151-CareerQ
-
 # Project Title: CareerQ
 
 ### Team 8: James Kim, Lucas Stevenson, Rio Taiga ###
@@ -39,7 +37,7 @@ Intended usage for recruiters/companies, students and schools.
 | [State](https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/stateDiagram.drawio.pdf)              | In this State Diagram, it shows different states (Student, Admin, Company) after being authenticated. Users are able to perform different tasks depending on what role the Users have.                                                                            |
 | [Sequence](https://github.com/LucasStevenson/CS151-CareerQ/blob/main/diagrams/CareerQSequenceDiagram.pdf)        | In this Sequence Diagram, it shows the sequence of user interaction between Student, GUI, userDatabase, Company, and Queue.                        |
 
-### Functionality
+## Functionality ##
 
 * We can provide a solution with organization where they provide the user interface for scheduling which companies that attendees are going to and manage communication with the recruiters. 
 
