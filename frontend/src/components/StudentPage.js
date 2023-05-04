@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-const StudentDashboard = () => {
+const StudentPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
