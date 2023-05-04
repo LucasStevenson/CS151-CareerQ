@@ -44,7 +44,7 @@ public class Company extends User {
 	//}
 	
 	public void acceptFirstStudent() {
-		
+        queue.removeFirst();
 	}
 	
 	public void setQueueSize(int size) {

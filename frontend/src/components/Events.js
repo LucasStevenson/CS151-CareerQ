@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const EventsPage = () => {
+const Events = () => {
     const [events, setEvents] = useState([]);
     useEffect(() => {
         async function fetchData() {
@@ -20,4 +20,4 @@ const EventsPage = () => {
     // how to make it so that it runs whenever a new event is added?
 }
 
-export default EventsPage;
+export default Events;

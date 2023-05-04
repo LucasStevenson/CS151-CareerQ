@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-const StudentDashboard = () => {
+const StudentPage = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      let rawResponse = await fetch(`http://localhost:8080/events`, {
+      let rawResponse = await fetch(`http://localhost:8080/student`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -41,4 +41,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default StudentPage;

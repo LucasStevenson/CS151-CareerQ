@@ -18,6 +18,16 @@ public class EventService {
 	private UserService userService = new UserService();
 	private static Map<String, Event> events = new HashMap<>(); // maps eventID's to their respective event
 	private Gson gson = new Gson(); // used for writing objects as json strings
+
+    public EventService() {
+		// add some default data
+		Event e1 = new Event("google@google.com", new Date("09/18/2023"), new Date("09/19/2023"));
+		Event e2 = new Event("tesla@tesla.com", new Date("09/29/2023"), new Date("09/30/2023"));
+		Event e3 = new Event("apple@apple.com", new Date("10/1/2023"), new Date("10/2/2023"));
+		events.put(e1.getEventID(), e1);
+		events.put(e2.getEventID(), e2);
+		events.put(e3.getEventID(), e3);
+	}
 	
 	// returns a list of all the events in the database where each event is a json string
 	public List<String> getAllEvents() {
