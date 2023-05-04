@@ -196,7 +196,7 @@ const Company = () => {
                 <Row>
                     <Col>
                         <div>
-                            <table className={styles.contentTable}>
+                            <table className={`${styles.contentTable} mx-auto`}>
                                 <thead>
                                     <tr>
                                         <th>Student Name</th>
