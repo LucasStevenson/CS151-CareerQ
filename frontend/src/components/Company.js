@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Form, Table } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
+import styles from "../Module/EventManagement.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const Company = () => {
@@ -189,33 +190,129 @@ const Company = () => {
                     </div>
                 </Form>
             </div>
+            <h3 className="mb-4 font-weight-normal text-center">Queue Management</h3>
 
-            <div>
-                <h3 className="mb-4 font-weight-normal text-center">Queue Management</h3>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Student Name</th>
-                            <th>Position in Queue</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {queue.map((student, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{student.name}</td>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        <Button variant="primary" onClick={() => handleRemoveStudent(index)}>Remove</Button>
-                                        <Button variant="secondary" onClick={() => handlePrioritizeStudent(index)}>Prioritize</Button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </Table>
-            </div>
+            <Container>
+                <Row>
+                    <Col>
+                        <div>
+                            <table className={styles.contentTable}>
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>Position in Queue</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className={styles.scrollableTbody}>
+                                    {queue.map((student, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{student.name}</td>
+                                                <td>{index + 1}</td>
+                                                <td>
+                                                    <Button variant="primary" onClick={() => handleRemoveStudent(index)}>Remove</Button>
+                                                    <Button variant="secondary" onClick={() => handlePrioritizeStudent(index)}>Prioritize</Button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                    <tr>
+                                        <td>Test Student 1</td>
+                                        <td>1</td>
+                                        <td>
+                                            <div style={{ display: 'flex', gap: '30px' }}>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="primary"
+                                                    size="sm"
+                                                >
+                                                    Accept
+                                                </Button>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    Deny
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test Student 2</td>
+                                        <td>2</td>
+                                        <td>
+                                            <div style={{ display: 'flex', gap: '30px' }}>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="primary"
+                                                    size="sm"
+                                                >
+                                                    Accept
+                                                </Button>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    Deny
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test Student 3</td>
+                                        <td>3</td>
+                                        <td>
+                                            <div style={{ display: 'flex', gap: '30px' }}>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="primary"
+                                                    size="sm"
+                                                >
+                                                    Accept
+                                                </Button>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    Deny
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Test Student 4</td>
+                                        <td>4</td>
+                                        <td>
+                                            <div style={{ display: 'flex', gap: '30px' }}>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="primary"
+                                                    size="sm"
+                                                >
+                                                    Accept
+                                                </Button>
+                                                <Button
+                                                    className={styles.actionButton}
+                                                    variant="danger"
+                                                    size="sm"
+                                                >
+                                                    Deny
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </Col>
+                </Row >
+            </Container>
+
+
             <div className="d-flex justify-content-center">
                 <Button variant="primary" type="submit" block size="lg" className="mb-4 font-weight-normal text-center">
                     <Link to="/Login" style={{ color: 'white' }}>Logout </Link>
