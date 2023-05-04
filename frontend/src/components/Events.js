@@ -5,7 +5,6 @@ import jwt_decode from "jwt-decode";
 const Events = () => {
     const [events, setEvents] = useState([]);
     const token = localStorage.getItem("token");
-    let decoded = jwt_decode(token);
     useEffect(() => {
         async function fetchData() {
             let rawResponse = await fetch(`http://localhost:8080/events`, {
@@ -49,10 +48,10 @@ const Events = () => {
                     <Button variant="primary" href={`/events/${event.eventID}`}>
                       View Details
                     </Button>
-                    {decoded !== null && decoded.uType === "company" && (
-                            <Button variant="primary" className="mx-3" onClick={() => companyJoinEvent(event.eventID)}>
-                                Join Event
-                            </Button>
+                    {token !== null && jwt_decode(token).uType === "company" && (
+                        <Button variant="primary" className="mx-3" onClick={() => companyJoinEvent(event.eventID)}>
+                            Join Event
+                        </Button>
                     )}
                   </Card.Body>
                 </Card>
