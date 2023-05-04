@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const navigate = useNavigate();
 
   // handle login logic (make post request to backend)
   const handleSubmit = async (event) => {
@@ -28,7 +32,19 @@ const Login = () => {
         }
         // at this point, the login was successful
         // we are given the jwt (stored in `res`)
-        document.cookie = `token=Bearer ${res}`; // store jwt in cookies
+        localStorage.setItem("token", res); // save token to localStorage
+
+        // Decode the token to get the user data
+        const decoded = jwt_decode(res);
+
+        // Redirect to the appropriate dashboard based on user role
+        if (decoded.uType === "school") {
+          navigate("/admin");
+        } else if (decoded.uType === "student") {
+          navigate("/student");
+        } else if (decoded.uType === "company") {
+          navigate("/company");
+        }
     } catch (err) {   
         setErrMsg(err.message);
     }

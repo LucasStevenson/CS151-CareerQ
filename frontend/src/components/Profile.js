@@ -13,8 +13,8 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  //Need to change this code so that it deletes the jwt from the cookies
   const handleLogOut = () => {
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
