@@ -5,9 +5,9 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import EventsPage from "./pages/EventsPage";
 import StudentPage from "./pages/StudentPage";
-import AdminPage from "./components/AdminPage";
-import CompanyPage from "./components/CompanyPage";
-import SingleEvent from "./components/SingleEvent";
+import AdminPage from "./pages/AdminPage";
+import CompanyPage from "./pages/CompanyPage";
+import SingleEventPage from "./pages/SingleEventPage";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/company" element={<CompanyPage />} /> 
             <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/:id" element={<SingleEvent />} />
+            <Route path="/events/:id" element={<SingleEventPage />} />
         </Routes>
     </Router>
   )
