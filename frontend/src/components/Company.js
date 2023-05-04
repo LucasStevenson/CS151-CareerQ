@@ -21,10 +21,6 @@ const Company = () => {
         // implementation
     };
 
-    const handlePrioritizeStudent = (id) => {
-        // implementation
-    };
-
     const useEffect = (id) => {
         // implementation
     };
@@ -65,28 +61,6 @@ const Company = () => {
         if (rawResponse.ok) {
             setQueue(updatedQueue);
             setStudentsInQueue(updatedQueue.length);
-        }
-    };
-
-    // prioritize a student in the queue
-    const prioritizeStudent = async (index) => {
-        let updatedQueue = [...queue];
-        let student = updatedQueue.splice(index, 1)[0];
-        updatedQueue.unshift(student);
-
-        let rawResponse = await fetch(`http://localhost:8080/queue`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                queue: updatedQueue,
-                threshold,
-            }),
-        });
-
-        if (rawResponse.ok) {
-            setQueue(updatedQueue);
         }
     };
 
@@ -153,20 +127,6 @@ const Company = () => {
     return (
         <>
             <h1 className="mb-4 font-weight-normal text-center">Company Dashboard</h1>
-            <h3 className="mb-4 font-weight-normal text-center ">Provide Description for your Company</h3>
-            <div className="d-flex justify-content-center">
-                <Form onSubmit={handleRegister}>
-                    <Form.Group controlId="companyDescription">
-                        <Form.Label className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>Company Description</Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Enter company description" required onChange={(e) => setCompanyDescription(e.target.value)} />
-                    </Form.Group>
-                    <div className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>
-                        <Button className="mb-4 font-weight-normal text-center" variant="primary" type="submit" >
-                            Register
-                        </Button>
-                    </div>
-                </Form>
-            </div>
             <div classname="d-flex justify-content-center">
                 <h3 className="mb-4 font-weight-normal text-center" style={{ paddingTop: "20px" }}> Live Queue Status </h3>
                 <h5 className="d-flex justify-content-center" style={{ paddingTop: "20px" }} >Number of students in queue: {queue.length} </h5>
@@ -212,7 +172,6 @@ const Company = () => {
                                                 <td>{index + 1}</td>
                                                 <td>
                                                     <Button variant="primary" onClick={() => handleRemoveStudent(index)}>Remove</Button>
-                                                    <Button variant="secondary" onClick={() => handlePrioritizeStudent(index)}>Prioritize</Button>
                                                 </td>
                                             </tr>
                                         );

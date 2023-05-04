@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import jwt_decode from "jwt-decode";
 
 const SingleEvent = () => {
   const [eventInfo, setEventInfo] = useState(null);
   const { id } = useParams();
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchData() {
@@ -17,6 +21,30 @@ const SingleEvent = () => {
     }
     fetchData();
   }, [id]);
+
+  const joinCompanyWaitingList = async (email) => {
+    let rawResponse = await fetch(`http://localhost:8080/joinCompanyQueue?companyEmail=${email}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    });
+    let res = await rawResponse.text();
+    alert(res);
+  }
+
+  const acceptCompanyFromWaitList = async (eventID, companyEmail) => {
+    let rawResponse = await fetch(`http://localhost:8080/events/${eventID}/acceptCompany?companyEmail=${companyEmail}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    let res = await rawResponse.text();
+    alert(res);
+  }
 
   if (!eventInfo) {
     return <div>Loading...</div>;
@@ -49,7 +77,14 @@ const SingleEvent = () => {
                 {eventInfo.participatingCompanies.length > 0 ? (
                   <ul>
                     {eventInfo.participatingCompanies.map((company) => (
-                      <li key={company}>{company}</li>
+                    <div>
+                      <li key={company.id}>{company.companyName}</li>
+                      {token !== null && jwt_decode(token).uType === "student" && (
+                        <Button variant="primary" className="mx-3" onClick={() => joinCompanyWaitingList(company.email)}>
+                        Join Queue
+                        </Button>
+                      )}
+                    </div>
                     ))}
                   </ul>
                 ) : (
@@ -60,8 +95,15 @@ const SingleEvent = () => {
                 <h5>Waiting List</h5>
                 {eventInfo.waitingList.length > 0 ? (
                   <ul>
-                    {eventInfo.waitingList.map((user) => (
-                      <li key={user}>{user}</li>
+                    {eventInfo.waitingList.map((company) => (
+                        <div>
+                      <li key={company.id}>{company.companyName}</li>
+                      {token !== null && jwt_decode(token).uType === "school" && (
+                        <Button variant="primary" onClick={() => acceptCompanyFromWaitList(eventInfo.eventID, company.email)} >
+                        Accept
+                      </Button>
+                      )}
+                      </div>
                     ))}
                   </ul>
                 ) : (
