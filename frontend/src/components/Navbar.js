@@ -1,7 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const Navbar = () => {
+    const token = localStorage.getItem("token");
+    let dashboardLink;
+    if (token) {
+      let decodedToken = jwt_decode(token);
+      let userType = decodedToken.uType;
+      switch(userType) {
+        case "school":
+          dashboardLink = "/admin";
+          break;
+        case "company":
+          dashboardLink = "/company";
+          break;
+        case "student":
+          dashboardLink = "/student";
+          break;
+        default:
+          break;
+      }
+    } else {
+      // user doesn't have jwt
+      // redirect to login page
+      dashboardLink = "/login";
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container">
@@ -22,7 +47,7 @@ const Navbar = () => {
             <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link to="/dashboard" className="nav-link">
+                  <Link to={dashboardLink} className="nav-link">
                     Dashboard
                   </Link>
                 </li>

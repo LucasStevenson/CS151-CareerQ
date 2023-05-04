@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import styles from "../Module/EventManagement.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const Student = () => {
@@ -107,21 +108,24 @@ const Student = () => {
           ))}
         </ul>
 
-        {selectedCompany && (
-          <div>
-            <h3>Check Queue Status</h3>
+        <div className="my-5" style={{ paddingTop: "5px" }}>
+          <h3 className="mb-4 font-weight-normal text-center">Check Queue Status</h3>
+          <div className="d-flex justify-content-center">
             <p>Queue Length: {queueLength}</p>
-            <p>Estimated Wait Time: {estimatedWaitTime}</p>
-            {queuePosition !== null ? (
-              <div>
-                <p>Your queue position is: {queuePosition}</p>
-                <Button onClick={handleLeaveQueue}>Leave Queue</Button>
-              </div>
-            ) : (
-              <Button onClick={handleJoinQueue}>Join Queue</Button>
-            )}
           </div>
-        )}
+          <div className="d-flex justify-content-center">
+            <p>Estimated Wait Time: {estimatedWaitTime}</p>
+          </div>
+            <div className="d-flex justify-content-center">
+                <p>Your queue position is: {queuePosition}</p>
+                </div>
+          <div className="d-flex justify-content-center" style={{ display: 'flex', gap: '100px' }}>
+            <Button onClick={handleJoinQueue}>Join Queue</Button>
+            <Button 
+                    variant="danger"
+                    onClick={handleLeaveQueue}>Leave Queue</Button>
+          </div>
+          </div>
 
         <div className="d-flex justify-content-center">
           <Button
