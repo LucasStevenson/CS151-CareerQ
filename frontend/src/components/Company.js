@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 
 const Company = () => {
     const [queue, setQueue] = useState([]);
@@ -144,54 +145,53 @@ const Company = () => {
         });
 
         if (rawResponse.ok) {
-            alert("Company registered!");
+            alert("Company Description registered!");
         }
     };
 
     return (
         <>
-            <h1>Company Dashboard</h1>
-            <div>
-                <h3>Register for the Career Fair</h3>
+            <h1 className="mb-4 font-weight-normal text-center">Company Dashboard</h1>
+            <h3 className="mb-4 font-weight-normal text-center ">Provide Description for your Company</h3>
+            <div className="d-flex justify-content-center">
                 <Form onSubmit={handleRegister}>
-                    <Form.Group controlId="companyName">
-                        <Form.Label>Company Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter company name" required onChange={(e) => setCompanyName(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" required onChange={(e) => setEmail(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
-                    </Form.Group>
                     <Form.Group controlId="companyDescription">
-                        <Form.Label>Company Description</Form.Label>
+                        <Form.Label className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>Company Description</Form.Label>
                         <Form.Control as="textarea" rows={3} placeholder="Enter company description" required onChange={(e) => setCompanyDescription(e.target.value)} />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Register
-                    </Button>
+                    <div className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>
+                        <Button className="mb-4 font-weight-normal text-center" variant="primary" type="submit" >
+                            Register
+                        </Button>
+                    </div>
                 </Form>
             </div>
-            <div>
-                <h3>Queue Status</h3>
-                <p>Number of students in queue: {queue.length}</p>
-                <Button variant="primary" onClick={handleAcceptStudent}>Accept First Student in Queue</Button>
+            <div classname="d-flex justify-content-center">
+                <h3 className="mb-4 font-weight-normal text-center" style={{ paddingTop: "20px" }}> Live Queue Status </h3>
+                <h5 className="d-flex justify-content-center" style={{ paddingTop: "20px" }} >Number of students in queue: {queue.length} </h5>
+                <div className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>
+                    <Button className="mb-4 font-weight-normal text-center" variant="primary" onClick={handleAcceptStudent}>Accept Next Student in Queue</Button>
+                </div>
                 <Form onSubmit={handleSetThreshold}>
                     <Form.Group controlId="queueThreshold">
-                        <Form.Label>Queue Threshold</Form.Label>
-                        <Form.Control type="number" placeholder="Enter maximum number of students in queue" required onChange={(e) => setQueueThreshold(e.target.value)} />
+                        <Form.Label className="d-flex justify-content-center" style={{ paddingTop: "20px" }}>Set Queue Threshold</Form.Label>
+                        <div className="d-flex justify-content-center">
+                            <Form.Control as="textarea" placeholder="Enter maximum number of students in queue" required onChange={(e) => setQueueThreshold(e.target.value)}
+                                style={{ height: '30px', width: '100px' }} />
+                        </div>
+
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Set Threshold
-                    </Button>
+
+                    <div className="d-flex justify-content-center" style={{ paddingTop: "20px", paddingBottom: "50px" }} >
+                        <Button variant="primary" type="submit">
+                            Set Threshold
+                        </Button>
+                    </div>
                 </Form>
             </div>
 
             <div>
-                <h3>Queue Management</h3>
+                <h3 className="mb-4 font-weight-normal text-center">Queue Management</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -215,6 +215,11 @@ const Company = () => {
                         })}
                     </tbody>
                 </Table>
+            </div>
+            <div className="d-flex justify-content-center">
+                <Button variant="primary" type="submit" block size="lg" className="mb-4 font-weight-normal text-center">
+                    <Link to="/Login" style={{ color: 'white' }}>Logout </Link>
+                </Button>
             </div>
         </>
     );

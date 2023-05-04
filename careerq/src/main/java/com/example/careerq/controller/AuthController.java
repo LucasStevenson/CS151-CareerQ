@@ -1,5 +1,6 @@
 package com.example.careerq.controller;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.careerq.config.JwtUtil;
 import com.example.careerq.exceptions.ExceptionHandler;
 import com.example.careerq.model.Company;
@@ -7,6 +8,7 @@ import com.example.careerq.model.School;
 import com.example.careerq.model.Student;
 import com.example.careerq.model.User;
 import com.example.careerq.service.UserService;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -43,7 +45,6 @@ public class AuthController {
     	    }
     	    // create and assign a token that is valid for some amount of time (TBD)
     	    String token = jwtutil.generateToken(user);
-
     	    res.status(200);
     	    return token;
         });

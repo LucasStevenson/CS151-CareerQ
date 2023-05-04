@@ -15,6 +15,10 @@ public class EventsController {
 		get("/events", (req, res) -> {
 			return eventService.getAllEvents();
 		});
+		
+		get("/events/:id", (req, res) -> {
+			return eventService.getEvent(req.params(":id"));
+		});
 
 		// returns a list of events that a particular school hosts
 		// get("/my-events", (req, res) -> {

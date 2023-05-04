@@ -17,10 +17,10 @@ public class EventService {
 	private UserService userService = new UserService();
 	private static Map<String, Event> events = new HashMap<>(); // maps eventID's to their respective event
 	private Gson gson = new Gson(); // used for writing objects as json strings
-
+	
     public EventService() {
 		// add some default data
-		Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023", "12PM", "3PM");
+    	Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023", "12PM", "3PM");
 		Event e2 = new Event("sfsu@sjsu.edu", "09/28/2023", "2PM", "4PM");
 		Event e3 = new Event("berkeley@berkeley.edu", "10/10/2023", "9AM", "2PM");
 		events.put(e1.getEventID(), e1);
