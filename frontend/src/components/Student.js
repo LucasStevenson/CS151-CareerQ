@@ -51,7 +51,7 @@ const Student = () => {
 
   return (
     <Container>
-    <div className="my-5"style={{ paddingTop: "50px" }}>
+    <div className="my-5"style={{ paddingTop: "5px" }}>
       <h1 className="mb-4 font-weight-normal text-center">Student Dashboard</h1>
       <h2 className="mb-4 font-weight-normal text-center">Browse Companies</h2>
       
@@ -82,16 +82,16 @@ const Student = () => {
       </ul>
       {selectedCompany && (
         <div>
-          <h2>{companies.find((c) => c.id === selectedCompany).name} Queue</h2>
+          <h3>Check Queue Status{{ paddingTop: "5px" }}</h3>
           <p>Queue Length: {queueLength}</p>
           <p>Estimated Wait Time: {estimatedWaitTime}</p>
           {queuePosition !== null ? (
             <div>
               <p>Your queue position is: {queuePosition}</p>
-              <button onClick={handleLeaveQueue}>Leave Queue</button>
+              <Button onClick={handleLeaveQueue}>Leave Queue</Button>
             </div>
           ) : (
-            <button onClick={handleJoinQueue}>Join Queue</button>
+            <Button onClick={handleJoinQueue}>Join Queue</Button>
           )}
         </div>
       )}
