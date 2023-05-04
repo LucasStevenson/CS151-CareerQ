@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userType, setUserType] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const navigate = useNavigate();
 
   // handle register logic 
   const handleSubmit = async (event) => {
@@ -30,18 +33,26 @@ const RegisterPage = () => {
             // res holds the error message
             throw new Error(res);
         }
-        // login was successful
-        console.log(res)
+        // register was successful
+        alert(`${res}. Directing you to the login page`);
+        navigate("/login");
     } catch (err) {   
         setErrMsg(err.message);
     }
   };
 
-    return (
-        <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Form onSubmit={handleSubmit}>
-        <h1>Register</h1>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+  return (
+    <Container
+      fluid
+      className="d-flex justify-content-center align-items-center vh-100 bg-light"
+    >
+      <Form
+        onSubmit={handleSubmit}
+        className="bg-white rounded p-5 shadow-sm"
+        style={{ maxWidth: "400px" }}
+      >
+        <h1 className="mb-4">Register</h1>
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -51,7 +62,7 @@ const RegisterPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -61,7 +72,7 @@ const RegisterPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Group controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
@@ -71,7 +82,7 @@ const RegisterPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicUserType">
+        <Form.Group controlId="formBasicUserType">
           <Form.Label>User Type</Form.Label>
           <Form.Control
             as="select"
@@ -87,7 +98,7 @@ const RegisterPage = () => {
           </Form.Control>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" block className="mt-2">
           Register
         </Button>
 
@@ -96,10 +107,16 @@ const RegisterPage = () => {
             {errMsg}
           </div>
         )}
+
+        <div className="mt-3 text-center">
+          <span className="mr-2">Already have an account? </span>
+          <Link to="/login" className="font-weight-bold">
+            Sign in
+          </Link>
+        </div>
       </Form>
     </Container>
-    );
-
+  );
 };
 
-export default RegisterPage;
+export default Register;
