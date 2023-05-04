@@ -2,8 +2,10 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import styles from "../Module/Profile.module.css";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const Profile = () => {
+  const token = localStorage.getItem("token");
   //Need to change this code so that it fetches the user's information from the database
   const user = {
     name: "John Doe",
