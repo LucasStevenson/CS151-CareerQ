@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [userType, setUserType] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const navigate = useNavigate();
 
   // handle register logic 
   const handleSubmit = async (event) => {
@@ -31,8 +33,9 @@ const RegisterPage = () => {
             // res holds the error message
             throw new Error(res);
         }
-        // login was successful
-        console.log(res)
+        // register was successful
+        alert(`${res}. Directing you to the login page`);
+        navigate("/login");
     } catch (err) {   
         setErrMsg(err.message);
     }
@@ -116,4 +119,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default Register;
