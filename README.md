@@ -9,7 +9,7 @@
  * Rio Taiga - Introduction of the project and the purpose of it, discussing the portions of Student Dashboard and Company Dashboard.
 
 ## Code and Report Contributions ##
- * Rio Taiga - Created Student Dashboard, Company Dashboard using GUI features, and created Use Case Diagram as well as State Diagram. 
+ * Rio Taiga - Created Student Dashboard, Company Dashboard using ReactJS (focused on frontend) which connects to backend, and created Use Case Diagram as well as State Diagram. 
  * Lucas Stevenson - Implemented the backend using Java Spark and managed user authorization with JsonWebTokens. Also created the register and login page on top of writing code on the frontend to connect to the backend.
 
 ## Problem/Issue to Resolve ##
@@ -80,3 +80,9 @@ School/Admin
 ## Steps to Run the Code ##
 
 ## Snapshot of the Running Program ##
+![Register](https://user-images.githubusercontent.com/53506239/236359889-c958512b-6bad-48ae-833c-783918d4026a.jpeg)
+![LoginPage](https://user-images.githubusercontent.com/53506239/236359880-b8497989-7ee5-4fd0-bae3-9f8bb4e310cc.jpeg)
+![CompanyPage](https://user-images.githubusercontent.com/53506239/236359910-69c95137-c511-44ee-a246-98ec9c15f4c8.jpeg)
+![QueueManagement](https://user-images.githubusercontent.com/53506239/236359960-18359e94-d209-442b-8e9e-7e850933422a.jpeg)
+![StudentDashboard](https://user-images.githubusercontent.com/53506239/236359931-9b37e5d8-aaa9-4635-b7d8-534af5ff9c3c.jpeg)
+![AdminEvent](https://user-images.githubusercontent.com/53506239/236359865-d21023cb-8607-453e-9358-aff19a2e2905.jpeg)
