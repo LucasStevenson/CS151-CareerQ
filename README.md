@@ -4,18 +4,18 @@
 
 ## Proposal Contributions ##
  * Rio Taiga - On the Proposal page, edited bullet points on Operations for what School/Admin and Company Recruiter should be able to do in the Dashboard. Also provided comment on how the Functionality is supposed to be.
- * Lucas Stevenson - 
+ * Lucas Stevenson - Contributed to user operations, such as the actions students and admins are able to do. Also wrote what the intended usage is for each type of user.
  * James Kim - Proposed problem/issue to resolve, worked on High Level Description of our solution, and composed functionalities for Student and edited part of Company.
 
 ## Project Presentation Contributions ##
  * Rio Taiga - Introduction of the project and the purpose of it, discussing the portions of Student Dashboard and Company Dashboard.
- * Lucas Stevenson - 
- * James Kim - Presented about our Frontend using React framework , provided information on the composite structure, event handler, state management, and data fetch used in the frontend.  
+ * Lucas Stevenson - Did the project demo and explained how different components are rendered to the screen depending on the type of user that is logged in. Talked about the backend and the libraries used.
+ * James Kim - Presented about our Frontend using React framework, provided information on the composite structure, event handler, state management, and data fetch used in the frontend.  
 
 ## Code and Report Contributions ##
  * Rio Taiga - Created Student Dashboard, Company Dashboard using ReactJS (focused on frontend) which connects to backend, and created Use Case Diagram as well as State Diagram. 
  * Lucas Stevenson - Implemented the backend using Java Spark and managed user authorization with JsonWebTokens. Also created the register and login page on top of writing code on the frontend to connect to the backend.
- * James Kim - Created Class Diagarm and Sequence Diagram. Created Admin Dashboard, Event Table, Profile Page, CSS Style Sheet using ReactJS. 
+ * James Kim - Created Class Diagram and Sequence Diagram. Created Admin Dashboard, Event Table, Profile Page, CSS Style Sheet using ReactJS. 
 
 ## Problem/Issue to Resolve ##
 
