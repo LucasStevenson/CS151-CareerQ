@@ -14,7 +14,7 @@
 
 ## Code and Report Contributions ##
  * Rio Taiga - Created Student Dashboard, Company Dashboard using ReactJS (focused on frontend) which connects to backend, and created Use Case Diagram as well as State Diagram. 
- * Lucas Stevenson - Implemented the backend using Java Spark and managed user authorization with JsonWebTokens. Also created the register and login page on top of writing code on the frontend to connect to the backend.
+ * Lucas Stevenson - Implemented the entire backend. Used Java Spark to manage all the API endpoints and JsonWebTokens to handle user authorization. On the frontend, created the register and login page on top of writing code on other pages to connect to the backend.
  * James Kim - Created Class Diagram and Sequence Diagram. Created Admin Dashboard, Event Table, Profile Page, CSS Style Sheet using ReactJS. 
 
 ## Problem/Issue to Resolve ##
@@ -83,6 +83,16 @@ School/Admin
 ## Solution ##
 
 ## Steps to Run the Code ##
+
+This application is split into two parts: the backend and the frontend. First, we need to start up the backend so that the frontend can talk to it.
+
+> To ensure running the backend goes smoothly, please make sure to have the latest version of Java installed
+
+How to start the backend
+- run `MainController.java`
+
+How to start the frontend
+- run `npm run start` inside the `frontend/` directory
 
 ## Snapshot of the Running Program ##
 ![Register](https://user-images.githubusercontent.com/53506239/236359889-c958512b-6bad-48ae-833c-783918d4026a.jpeg)
