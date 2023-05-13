@@ -22,11 +22,11 @@ public class VariablesConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         jwtSecret = props.getProperty("jwt.secretKey");
         jwtExpireTime = props.getProperty("jwt.tokenLifetime");
     }
-    
+
     public static synchronized VariablesConfig getInstance() { // multithreading safe
         if (instance == null) {
             instance = new VariablesConfig();
@@ -37,8 +37,8 @@ public class VariablesConfig {
     public String getJWTsecret() {
         return jwtSecret;
     }
-    
+
     public int getJWTexpireTime() {
-    	return Integer.parseInt(jwtExpireTime);
+        return Integer.parseInt(jwtExpireTime);
     }
 }
