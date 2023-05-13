@@ -14,7 +14,7 @@
 
 ## Code and Report Contributions ##
  * Rio Taiga - Created Student Dashboard, Company Dashboard using ReactJS (focused on frontend) which connects to backend, and created Use Case Diagram as well as State Diagram. 
- * Lucas Stevenson - Implemented the entire backend. Used Java Spark to manage all the API endpoints and JsonWebTokens to handle user authorization. On the frontend, created the register and login page on top of writing code on other pages to connect to the backend.
+ * Lucas Stevenson - Implemented the entire backend. Used Java Spark to manage all the API endpoints and JsonWebTokens to handle user authorization. On the frontend, created the Events page, the homepage, event info pages, and the register + login. Also added functionality to the EventManagement page via connecting the UI to the backend.
  * James Kim - Created Class Diagram and Sequence Diagram. Created Admin Dashboard, Event Table, Profile Page, CSS Style Sheet using ReactJS. 
 
 ## Problem/Issue to Resolve ##
