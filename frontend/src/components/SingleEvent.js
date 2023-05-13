@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 
 const SingleEvent = () => {
   const [eventInfo, setEventInfo] = useState(null);
+  const [rerun, setRerun] = useState(false); // this is for re-running the useEffect() method, which fetches the latest data for a specific event
   const { id } = useParams();
 
   const token = localStorage.getItem("token");
@@ -14,13 +15,14 @@ const SingleEvent = () => {
       try {
         const response = await fetch(`http://localhost:8080/events/${id}`);
         const data = await response.json();
+        console.log(data);
         setEventInfo(data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
-  }, [id]);
+  }, [rerun]);
 
   const joinCompanyWaitingList = async (email) => {
     let rawResponse = await fetch(`http://localhost:8080/joinCompanyQueue?companyEmail=${email}`, {
@@ -31,6 +33,7 @@ const SingleEvent = () => {
         }
     });
     let res = await rawResponse.text();
+    setRerun(!rerun); // want to rerun the useEffect() method 
     alert(res);
   }
 
@@ -42,8 +45,8 @@ const SingleEvent = () => {
             Authorization: `Bearer ${token}`
         }
     })
-    let res = await rawResponse.text();
-    alert(res);
+    // refetch the data from the backend so that the page updates live 
+    setRerun(!rerun);  // by doing this, when a company is accepted from the waitlist, they automatically get moved from the waitlist list to the participating companies list on the user's screen without the need to refresh
   }
 
   if (!eventInfo) {
@@ -64,9 +67,6 @@ const SingleEvent = () => {
                 <strong>Host:</strong> {eventInfo.host}
               </p>
               <p>
-                <strong>Date:</strong> {eventInfo.day}
-              </p>
-              <p>
                 <strong>Start Time:</strong> {eventInfo.startTime}
               </p>
               <p>
@@ -78,7 +78,7 @@ const SingleEvent = () => {
                   <ul>
                     {eventInfo.participatingCompanies.map((company) => (
                     <div>
-                      <li key={company.id}>{company.companyName}</li>
+                      <li key={company.id}>{company.name}</li>
                       {token !== null && jwt_decode(token).uType === "student" && (
                         <Button variant="primary" className="mx-3" onClick={() => joinCompanyWaitingList(company.email)}>
                         Join Queue
@@ -97,7 +97,7 @@ const SingleEvent = () => {
                   <ul>
                     {eventInfo.waitingList.map((company) => (
                         <div>
-                      <li key={company.id}>{company.companyName}</li>
+                      <li key={company.id}>{company.name}</li>
                       {token !== null && jwt_decode(token).email === eventInfo.host && (
                         <Button variant="primary" onClick={() => acceptCompanyFromWaitList(eventInfo.eventID, company.email)} >
                         Accept
@@ -119,4 +119,3 @@ const SingleEvent = () => {
 };
 
 export default SingleEvent;
-

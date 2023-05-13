@@ -6,10 +6,12 @@ import jwt_decode from "jwt-decode";
 
 const Profile = () => {
   const token = localStorage.getItem("token");
-  //Need to change this code so that it fetches the user's information from the database
+  const decoded = jwt_decode(token);
+
   const user = {
-    name: "John Doe",
-    email: "test@example.com",
+    name: decoded.name,
+    email: decoded.email,
+    uType: decoded.uType,
     profilePic: "/profile.png",
   };
 
@@ -31,7 +33,8 @@ const Profile = () => {
         />
         <div className={styles.profileDetails}>
           <h2>{user.name}</h2>
-          <p>{user.email}</p>
+          <p>Email: {user.email}<br />
+            UserType: {user.uType}</p>
         </div>
       </div>
       <Button variant="primary" size="sm" onClick={handleLogOut}>

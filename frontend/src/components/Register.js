@@ -33,7 +33,6 @@ const Register = () => {
             throw new Error(res);
         }
         // register was successful
-        alert(`${res}. Directing you to the login page`);
         navigate("/login");
     } catch (err) {   
         setErrMsg(err.message);

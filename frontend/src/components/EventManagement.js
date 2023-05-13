@@ -4,25 +4,45 @@ import styles from "../Module/EventManagement.module.css";
 
 const EventManagement = () => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [rerun, setRerun] = useState(false); // this is for re-running the useEffect() method
+  
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
   const [show, setShow] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const token = localStorage.getItem("token");
 
-  // Delete event function
-  // Does not work yet
+  // create an event
+  const createEvent = async () => {
+      let rawResponse = await fetch(`http://localhost:8080/create-event`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({   // stringify the request body object
+              "startTime": startTime,
+              "endTime": endTime
+          })
+      })
+      setRerun(!rerun); // we want to refetch the events after creating a new one
+      handleClose();
+  }
+
+  // delete event function
   const deleteEvent = async (id) => {
-    console.log(id);
     let rawResponse = await fetch(`http://localhost:8080/remove-event/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer {token}`
+        Authorization: `Bearer ${token}`
       },
     })
-    let res = await rawResponse.json();
-    console.log(res);
+    setEvents(events.filter((event) => event.eventID !== id)); // update the state
   };
 
   useEffect(() => {
@@ -36,9 +56,10 @@ const EventManagement = () => {
       });
       let res = await rawResponse.json();
       setEvents(res);
+      setLoading(false);
     }
     fetchData();
-  }, []);
+  }, [rerun]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,6 +68,17 @@ const EventManagement = () => {
     setShowEdit(true);
   };
   const handleCloseEdit = () => setShowEdit(false);
+
+  const formatDate = (dateString) => { // dateString: "2023-05-26T20:55"
+      // convert `dateString` into a normal string with this format: mm/dd/yyyy at 00:00
+      let [date, time] = dateString.split("T");
+      let [year, month, day] = date.split("-");
+      return `${month}/${day}/${year} at ${time}`;
+  };
+
+  if (loading) {
+    return "Fetching data...";
+  }
 
   return (
     <Container>
@@ -69,7 +101,6 @@ const EventManagement = () => {
               <tr>
                 <th>Event ID</th>
                 <th>Host</th>
-                <th>Day</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Waiting List</th>
@@ -83,7 +114,6 @@ const EventManagement = () => {
               <tr key={event.eventID}>
                 <td>{event.eventID}</td>
                 <td>{event.host}</td>
-                <td>{event.day}</td>
                 <td>{event.startTime}</td>
                 <td>{event.endTime}</td>
                 <td>{event.waitingList.length}</td>
@@ -115,19 +145,14 @@ const EventManagement = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="eventHost">
-              <Form.Label>Host</Form.Label>
-              <Form.Control type="text" placeholder="Enter host" />
-            </Form.Group>
-
             <Form.Group controlId="eventStartTime">
               <Form.Label>Start Time</Form.Label>
-              <Form.Control type="datetime-local" />
+              <Form.Control type="datetime-local" onChange={(e) => setStartTime(formatDate(e.target.value))}/>
             </Form.Group>
 
             <Form.Group controlId="eventEndTime">
               <Form.Label>End Time</Form.Label>
-              <Form.Control type="datetime-local" />
+              <Form.Control type="datetime-local" onChange={(e) => setEndTime(formatDate(e.target.value))} />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -135,7 +160,7 @@ const EventManagement = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={createEvent}>
             Add Event
           </Button>
         </Modal.Footer>
@@ -149,15 +174,6 @@ const EventManagement = () => {
         <Modal.Body>
           {selectedEvent && (
             <Form>
-              <Form.Group controlId="eventHost">
-                <Form.Label>Host</Form.Label>
-                <Form.Control
-                  type="text"
-                  defaultValue={selectedEvent.host}
-                  placeholder="Enter host"
-                />
-              </Form.Group>
-
               <Form.Group controlId="eventStartTime">
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control

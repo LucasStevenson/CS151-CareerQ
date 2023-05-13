@@ -13,7 +13,6 @@ const Events = () => {
                     "Content-Type": "application/json"
                 },
             });
-            console.log(rawResponse);
             let res = await rawResponse.json();
             setEvents(res);
             console.log(events);
@@ -43,8 +42,8 @@ const Events = () => {
                   <Card.Img variant="top" src={event.image_url} />
                   <Card.Body>
                     <Card.Title>{event.host}</Card.Title>
-                    <Card.Text>Day: {event.day}</Card.Text>
-                    <Card.Text>Time Frame: {event.startTime} - {event.endTime}</Card.Text>
+                    <Card.Text>Start Time: {event.startTime}</Card.Text>
+                    <Card.Text>End Time: {event.endTime}</Card.Text>
                     <Button variant="primary" href={`/events/${event.eventID}`}>
                       View Details
                     </Button>
