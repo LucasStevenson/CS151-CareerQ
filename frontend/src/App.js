@@ -9,11 +9,13 @@ import AdminPage from "./pages/AdminPage";
 import CompanyPage from "./pages/CompanyPage";
 import SingleEventPage from "./pages/SingleEventPage";
 import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/student" element={<StudentPage />} />
