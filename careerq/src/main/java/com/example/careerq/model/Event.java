@@ -9,7 +9,6 @@ import com.google.common.hash.Hashing;
 public class Event {
 	private String eventID;
 	private String host;
-	private String day;
 	private String startTime;
 	private String endTime;
 	private List<Company> waitingList = new ArrayList<>();
@@ -18,12 +17,11 @@ public class Event {
 	public Event() {
 	}
 
-	public Event(String hostEmail, String day, String startTime, String endTime) {
+	public Event(String hostEmail, String startTime, String endTime) {
 		this.host = hostEmail;
-		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.eventID = Hashing.sha256().hashString(host+day+startTime+endTime, StandardCharsets.UTF_8).toString().substring(0,15);
+		this.eventID = Hashing.sha256().hashString(host+startTime+endTime, StandardCharsets.UTF_8).toString().substring(0,15);
 	}
 
 	// removes a specific company from an event
@@ -64,14 +62,6 @@ public class Event {
 
 	public void setHost(String host) {
 		this.host = host;
-	}
-
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
 	}
 
 	public String getStartTime() {

@@ -6,13 +6,15 @@ public class User {
 	private String id;
 	private String email;
 	private String password;
+	private String name;
 	private String userType;
 	
 	public User() {}
 	
-	public User(String email, String password, String userType) {
+	public User(String email, String name, String password, String userType) {
 		this.id = Integer.toHexString(new Random().nextInt(1000000000) + 1); // generate number between 1 and 1B. convert into into hexadecimal string
 		this.email = email;
+		this.name = name;
 		this.password = password;
 		this.userType = userType;
 	}
@@ -32,6 +34,14 @@ public class User {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getPassword() {

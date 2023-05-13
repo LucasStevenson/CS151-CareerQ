@@ -21,9 +21,9 @@ public class EventService {
 	
     public EventService() {
 		// add some default data
-    	Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023", "12PM", "3PM");
-		Event e2 = new Event("sfsu@sfsu.edu", "09/28/2023", "2PM", "4PM");
-		Event e3 = new Event("berkeley@berkeley.edu", "10/10/2023", "9AM", "2PM");
+    	Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023 at 12:00", "09/18/2023 at 15:00");
+		Event e2 = new Event("sfsu@sfsu.edu", "09/23/2023 at 13:00", "09/23/2023 at 16:00");
+		Event e3 = new Event("berkeley@berkeley.edu", "10/02/2023 at 12:00", "09/18/2023 at 15:00");
 		events.put(e1.getEventID(), e1);
 		events.put(e2.getEventID(), e2);
 		events.put(e3.getEventID(), e3);
@@ -91,15 +91,14 @@ public class EventService {
 			return new Object[]{"You are not allowed to create events", 401};
 		}
 		// check to make request has required fields
-		if (!(json.has("day") && json.has("startTime") && json.has("endTime"))) {
-			return new Object[]{"Must provide a day, start time and end time for the event", 400};
+		if (!(json.has("startTime") && json.has("endTime"))) {
+			return new Object[]{"Must provide a start time and end time for the event", 400};
 		}
-		// get the date, startTime, endTime
-		String day = json.get("day").getAsString();
+		// get the startTime, endTime
 		String startTime = json.get("startTime").getAsString();
 		String endTime = json.get("endTime").getAsString();
 		// create the event
-		Event newEvent = new Event(hostEmail, day, startTime, endTime);
+		Event newEvent = new Event(hostEmail, startTime, endTime);
 		events.put(newEvent.getEventID(), newEvent);
 		return new Object[]{"Successfully created new event", 200};
 	}

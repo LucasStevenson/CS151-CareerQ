@@ -47,7 +47,6 @@ public class EventsController {
 			 Object[] response = eventService.acceptCompany(req.params(":eventID"), req.queryParams("companyEmail"), req.headers("Authorization"));
 			res.status((Integer)response[1]);
 			return (String)response[0];
-			 
 		 });
 		
 		// company wants to join an event

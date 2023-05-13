@@ -4,27 +4,16 @@ import com.example.careerq.Queue;
 import com.example.careerq.QueueStatus;
 
 public class Company extends User {
-
-	private String companyName;
 	private Queue<User> queue = new Queue<>();
 	
 	public Company() {}
 	
-	public Company(String email, String password, String companyName) {
-		super(email, password, "company");
-		this.companyName = companyName;
+	public Company(String email, String password, String name) {
+		super(email, name, password, "company");
 	}
 	
 	public Queue<User> getQueue() {
 		return queue;
-	}
-	
-	public String getCompanyName() {
-		return companyName;
-	}
-	
-	public void setCompanyName(String name) {
-		this.companyName = name;
 	}
 	
 	public boolean addToQueue(Student s) { // returns true if user successfully added to queue, otherwise false
