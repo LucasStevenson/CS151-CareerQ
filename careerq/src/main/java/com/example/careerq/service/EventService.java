@@ -21,9 +21,9 @@ public class EventService {
 
     public EventService() {
         // add some default data
-        Event e1 = new Event("sjsu@sjsu.edu", "09/18/2023 at 12:00", "09/18/2023 at 15:00");
-        Event e2 = new Event("sfsu@sfsu.edu", "09/23/2023 at 13:00", "09/23/2023 at 16:00");
-        Event e3 = new Event("berkeley@berkeley.edu", "10/02/2023 at 12:00", "09/18/2023 at 15:00");
+        Event e1 = new Event("sjsu@sjsu.edu", "San Jose State University", "09/18/2023 at 12:00", "09/18/2023 at 15:00");
+        Event e2 = new Event("sfsu@sfsu.edu", "San Francisco State University", "09/23/2023 at 13:00", "09/23/2023 at 16:00");
+        Event e3 = new Event("berkeley@berkeley.edu", "Berkeley", "10/02/2023 at 12:00", "09/18/2023 at 15:00");
         events.put(e1.getEventID(), e1);
         events.put(e2.getEventID(), e2);
         events.put(e3.getEventID(), e3);
@@ -87,6 +87,7 @@ public class EventService {
         }
         // only School users can create events
         String hostEmail = decodedJWT.getClaim("email").asString();
+        String hostName = decodedJWT.getClaim("name").asString();
         if (!userService.findByEmail(hostEmail).getUserType().equals("school")) {
             return new Object[]{"You are not allowed to create events", 401};
         }
@@ -98,7 +99,7 @@ public class EventService {
         String startTime = json.get("startTime").getAsString();
         String endTime = json.get("endTime").getAsString();
         // create the event
-        Event newEvent = new Event(hostEmail, startTime, endTime);
+        Event newEvent = new Event(hostEmail, hostName, startTime, endTime);
         events.put(newEvent.getEventID(), newEvent);
         return new Object[]{"Successfully created new event", 200};
     }
